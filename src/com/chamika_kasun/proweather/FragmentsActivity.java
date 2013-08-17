@@ -105,5 +105,9 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void shoe(){
+		
+	}
 
 }
