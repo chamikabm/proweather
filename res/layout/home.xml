@@ -5,14 +5,16 @@
     android:background="@drawable/background_home"
     android:orientation="vertical" >
 
+  
+
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvUpdateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Updated Time : 11:40:04 PM" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/ivLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,10 +28,65 @@
         android:layout_gravity="center"
         android:text=" University of Moratuwa" />
 
+    <TableLayout
+        android:id="@+id/tableTimeAndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp" >
+
+        <TableRow
+            android:id="@+id/trTimeAndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rlTimeAndDate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/tvTimeCurrent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:42 AM"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/tvDayWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tvTimeCurrent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tvTimeCurrent"
+                    android:text="Saturday"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tvDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tvTimeCurrent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tvTimeCurrent"
+                    android:text="8/20/2013"
+                    android:textSize="20sp" />
+
+                <View
+                    android:id="@+id/viewTime"
+                    android:layout_width="2dip"
+                    android:layout_height="50dip"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/tvTimeCurrent" />
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+
     <RelativeLayout
         android:id="@+id/flMiddle"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
         android:layout_gravity="center" >
 
         <TextView
@@ -37,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="35dp"
             android:text="25\u2103"
             android:textSize="78sp" />
 
@@ -47,7 +104,6 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tvTemparature"
             android:layout_below="@+id/tvTemparature"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="3dp"
             android:text="Feels Like 25\u2103" />
 
@@ -55,10 +111,7 @@
             android:id="@+id/ivWeatherCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="50dp"
+            android:layout_alignBottom="@+id/tvTemparature"
             android:layout_toRightOf="@+id/tvTemparature"
             android:src="@drawable/night_rain" />
     </RelativeLayout>
@@ -211,66 +264,6 @@
             </TableRow>
         </TableLayout>
     </RelativeLayout>
-
-    <TableLayout
-        android:id="@+id/tableTimeAndDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp" >
-
-        <TableRow
-            android:id="@+id/trTimeAndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <RelativeLayout
-                android:id="@+id/rlTimeAndDate"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center" >
-
-                <TextView
-                    android:id="@+id/tvTimeCurrent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="09:42 AM"
-                    android:textColor="#ffff"
-                    android:textSize="40sp" />
-
-                <TextView
-                    android:id="@+id/tvDayWord"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/tvTimeCurrent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/tvTimeCurrent"
-                    android:text="Saturday"
-                    android:textColor="#ffff"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tvDay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tvTimeCurrent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/tvTimeCurrent"
-                    android:text="8/20/2013"
-                    android:textColor="#ffff"
-                    android:textSize="20sp" />
-
-                <View
-                    android:id="@+id/viewTime"
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="2dip"
-                    android:layout_height="50dip"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/tvTimeCurrent"
-                    android:background="#ffff" />
-            </RelativeLayout>
-        </TableRow>
-    </TableLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
