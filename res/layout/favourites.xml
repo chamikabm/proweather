@@ -2,7 +2,1075 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_home"
     android:orientation="vertical" >
-    
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Embilipitiya"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Matara"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Galle"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Bandarawela"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Badulla"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Hambanthota"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Jaffna"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Negambo"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Trinco"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Chilow"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Vavuniya"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Akuressa"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Tissamaharamaya"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#2B497B" />
+            <!-- This is the Start of one Favourite Item -->
+
+            <TableLayout
+                android:id="@+id/tlFav1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:id="@+id/trFav1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/rlFav1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/ivFav1Image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/night_rain_72" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivFav1Image"
+                            android:text="Deniyaya"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1"
+                            android:layout_below="@+id/tvFavLocation1"
+                            android:text="Mostly Clear"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1DayTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvFavLocation1"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/tvFavLocation1"
+                            android:text="24\u2103"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvFavLocation1NightTemparature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvFavLocation1DayTemparature"
+                            android:layout_below="@+id/tvFavLocation1DayTemparature"
+                            android:layout_marginTop="8.9dp"
+                            android:text="18\u2103"
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
