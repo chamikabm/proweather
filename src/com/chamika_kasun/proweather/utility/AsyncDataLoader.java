@@ -1,12 +1,13 @@
 package com.chamika_kasun.proweather.utility;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
-
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.chamika_kasun.proweather.base.BaseFragment;
@@ -29,33 +30,42 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 	@Override
 	protected String doInBackground(String... params) {
 		
-		if(params[0] == null) {
+		String url = null;
+		if (params != null && params.length > 0) {
+			url = params[0];
+		} else {
 			return null;
 		}
 		
-		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet();
-		request.setURI(URI.create(params[0]));
-		HttpResponse response = client.execute(request);
+		InputStream is = null;
+		HttpPost httppost;
+		String result = null;
 		
 		try {
-			Ki
-		} catch() {
+			HttpClient httpclient = new DefaultHttpClient();
+			httppost = new HttpPost(url);
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			is = entity.getContent();
 			
+ 		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
-		in = new BufferedReader(new InputStreamReader(response.getEntity()
-				.getContent()));
-		StringBuffer sb = new StringBuffer("");
-		String l = "";
-		String nl = System.getProperty("line.separator");
-		while ((l = in.readLine()) != null) {
-			sb.append(l + nl);
+				
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			is.close();
+			result = sb.toString();
+			return result;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		in.close();
-		data = sb.toString();
-		System.out.print(data);
-		
-		
 		return null;
 	}
 	

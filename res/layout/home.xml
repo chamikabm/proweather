@@ -5,8 +5,6 @@
     android:background="@drawable/background_home"
     android:orientation="vertical" >
 
-  
-
     <TextView
         android:id="@+id/tvUpdateTime"
         android:layout_width="wrap_content"
@@ -98,14 +96,14 @@
             android:text="25\u2103"
             android:textSize="78sp" />
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/tvFeelLikeTemparature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tvTemparature"
             android:layout_below="@+id/tvTemparature"
             android:layout_marginTop="3dp"
-            android:text="Feels Like 25\u2103" />
+            android:text="Feels Like 25\u2103" /> -->
 
         <ImageView
             android:id="@+id/ivWeatherCondition"
@@ -134,18 +132,18 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/tvDewPoint"
+                    android:id="@+id/tvtempMax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dew Point"
+                    android:text="Max Temp"
                     android:textColor="#ffff" />
 
                 <TextView
-                    android:id="@+id/tvDewPointValue"
+                    android:id="@+id/tvTempMaxValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="24\u00B0"
+                    android:text="24\u2103"
                     android:textColor="#ffff" />
             </TableRow>
 
@@ -220,30 +218,72 @@
             android:layout_alignTop="@+id/tableLeft"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/tableLeft" >
-
+            
             <TableRow
                 android:id="@+id/tableRow5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/tvGuest"
+                    android:id="@+id/tvtempMin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Guest"
+                    android:text="Min Temp"
                     android:textColor="#ffff" />
 
                 <TextView
-                    android:id="@+id/tvGuestValue"
+                    android:id="@+id/tvTempMinValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="W21"
+                    android:text="24\u2103"
+                    android:textColor="#ffff" />
+            </TableRow>
+            
+            <TableRow
+                android:id="@+id/tableRow6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wind Speed"
+                    android:textColor="#ffff" />
+
+                <TextView
+                    android:id="@+id/tvWindValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="4.6 kmph"
                     android:textColor="#ffff" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow6"
+                android:id="@+id/tableRow7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvWindDirection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wind Direction"
+                    android:textColor="#ffff" />
+
+                <TextView
+                    android:id="@+id/tvWindDirectionValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="250"
+                    android:textColor="#ffff" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 

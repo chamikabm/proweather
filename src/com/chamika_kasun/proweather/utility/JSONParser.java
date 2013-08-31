@@ -1,5 +1,6 @@
 package com.chamika_kasun.proweather.utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,11 +33,12 @@ public class JSONParser {
 			long sunrise = sys.optLong("sunrise");
 			long sunset = sys.optLong("sunset");
 
-			// Create Child Object to get weather descriptions. and get relevant
+			// Create Child Object to get weather descriptions and get relevant
 			// data.
-			JSONObject weather = mainObj.getJSONObject("weather");
-			String mainDescription = weather.getString("main");
-			String description = weather.getString("description");
+			JSONArray weather = mainObj.getJSONArray("weather");
+			JSONObject weatherItem = weather.getJSONObject(0);
+			String mainDescription = weatherItem.getString("main");
+			String description = weatherItem.getString("description");
 
 			// Create Child Object to get weather conditions. and get relevant
 			// data.
@@ -52,16 +54,13 @@ public class JSONParser {
 			JSONObject wind = mainObj.getJSONObject("wind");
 			float windSpeed = Float.parseFloat(wind.getString("speed"));
 			float deg = Float.parseFloat(wind.getString("deg"));
-			float var_beg = Float.parseFloat(wind.getString("var_beg"));
-			float var_end = Float.parseFloat(wind.getString("var_end"));
 
-			// Create a Object to get City Name
-			JSONObject city = mainObj.getJSONObject("city");
-			String city_name = city.getString("city");
+			// get City Name
+			String city_name = mainObj.getString("name");
 
 			// Create a Location Object with Retrieved Data
 			locationObj = new Location(latitude, longitude, country, city_name);
-			windObj = new Wind(windSpeed, deg, var_beg, var_end);
+			windObj = new Wind(windSpeed, deg);
 			weatherObj = new Weather(sunrise, sunset, mainDescription, description, temperature, pressure, humidity, minTemperature, maxTemperature, locationObj, windObj);
 			
 

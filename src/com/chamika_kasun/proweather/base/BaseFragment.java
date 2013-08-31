@@ -3,7 +3,6 @@ package com.chamika_kasun.proweather.base;
 import com.chamika_kasun.proweather.utility.AsyncDataLoader;
 import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.Utils;
-
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;

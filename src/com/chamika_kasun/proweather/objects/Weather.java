@@ -13,6 +13,12 @@ public class Weather {
 	private float temperatureMax;
 	private Location location;
 	private Wind wind;
+	private float windSpeed;
+	private float deg;
+	private float latitude;
+	private float longitude;
+	private String country;
+	private String city;
 
 	public Weather(long sunrise, long sunset, String mainDescription,
 			String description, float temperature, float pressure,
@@ -27,7 +33,39 @@ public class Weather {
 		this.pressure = pressure;
 		this.temperatureMin = temperatureMin;
 		this.temperatureMax = temperatureMax;
+		this.location = location;
+		this.wind = wind;
+		this.windSpeed = wind.getWindSpeed();
+		this.deg = wind.getDeg();
+		this.latitude = location.getLatitude();
+		this.longitude = location.getLongitude();
+		this.country = location.getCountry();
+		this.city = location.getCity();
 
+	}
+
+	public float getWindSpeed() {
+		return windSpeed;
+	}
+
+	public float getDeg() {
+		return deg;
+	}
+
+	public float getLatitude() {
+		return latitude;
+	}
+
+	public float getLongitude() {
+		return longitude;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public String getCity() {
+		return city;
 	}
 
 	public Location getLocation() {
@@ -38,7 +76,7 @@ public class Weather {
 		return wind;
 	}
 
-	public long getSinrise() {
+	public long getSunrise() {
 		return sunrise;
 	}
 
