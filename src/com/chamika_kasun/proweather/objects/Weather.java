@@ -41,6 +41,7 @@ public class Weather {
 		this.longitude = location.getLongitude();
 		this.country = location.getCountry();
 		this.city = location.getCity();
+		this.humidity = humidity;
 
 	}
 
