@@ -96,15 +96,6 @@
             android:text="25\u2103"
             android:textSize="78sp" />
 
-       <!-- <TextView
-            android:id="@+id/tvFeelLikeTemparature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvTemparature"
-            android:layout_below="@+id/tvTemparature"
-            android:layout_marginTop="3dp"
-            android:text="Feels Like 25\u2103" /> -->
-
         <ImageView
             android:id="@+id/ivWeatherCondition"
             android:layout_width="wrap_content"
@@ -330,11 +321,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime12AM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="7:00 AM"
+                            android:text="12:00 AM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -351,7 +342,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime12AMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -375,11 +366,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime3AM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="8:00 AM"
+                            android:text="3:00 AM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -396,7 +387,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime3AMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -420,11 +411,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime6AM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="9:00 AM"
+                            android:text="6:00 AM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -441,7 +432,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime6AMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -465,11 +456,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime9AM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="10:00 AM"
+                            android:text="9:00 AM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -486,7 +477,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime9AMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -510,11 +501,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime12PM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="11:00 AM"
+                            android:text="12:00 PM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -531,7 +522,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime12PMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -555,11 +546,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime3PM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="12:00 PM"
+                            android:text="1:00 PM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -576,7 +567,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime3PMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -600,11 +591,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime6PM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="1:00 PM"
+                            android:text="3:00 PM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -621,7 +612,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime6PMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -645,11 +636,11 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTimeOne"
+                            android:id="@+id/tvTime9PM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="2:00 PM"
+                            android:text="6:00 PM"
                             android:textColor="#ffff" />
                     </TableRow>
 
@@ -666,7 +657,7 @@
                     <TableRow>
 
                         <TextView
-                            android:id="@+id/tvTempOne"
+                            android:id="@+id/tvTime9PMValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -682,231 +673,9 @@
                     android:layout_height="130dip"
                     android:background="#2B497B" />
 
-                <TableLayout
-                    android:id="@+id/tableDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+               
 
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTimeOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="3:00 AM"
-                            android:textColor="#ffff" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/one" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTempOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="25\u2103"
-                            android:textColor="#ffff"
-                            android:textSize="20sp" />
-                    </TableRow>
-                </TableLayout>
-
-                <View
-                    android:id="@+id/View01"
-                    android:layout_width="2dip"
-                    android:layout_height="130dip"
-                    android:background="#2B497B" />
-
-                <TableLayout
-                    android:id="@+id/tableDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTimeOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="4:00 PM"
-                            android:textColor="#ffff" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/two"
-                            android:textColor="#ffff" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTempOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="22\u2103"
-                            android:textColor="#ffff"
-                            android:textSize="20sp" />
-                    </TableRow>
-                </TableLayout>
-
-                <View
-                    android:id="@+id/View01"
-                    android:layout_width="2dip"
-                    android:layout_height="130dip"
-                    android:background="#2B497B" />
-
-                <TableLayout
-                    android:id="@+id/tableDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTimeOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="5:00 PM"
-                            android:textColor="#ffff" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/three" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTempOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="20\u2103"
-                            android:textColor="#ffff"
-                            android:textSize="20sp" />
-                    </TableRow>
-                </TableLayout>
-
-                <View
-                    android:id="@+id/View01"
-                    android:layout_width="2dip"
-                    android:layout_height="130dip"
-                    android:background="#2B497B" />
-
-                <TableLayout
-                    android:id="@+id/tableDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTimeOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="6:00 PM"
-                            android:textColor="#ffff" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/four" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTempOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="20\u2103"
-                            android:textColor="#ffff"
-                            android:textSize="20sp" />
-                    </TableRow>
-                </TableLayout>
-
-                <View
-                    android:id="@+id/View01"
-                    android:layout_width="2dip"
-                    android:layout_height="130dip"
-                    android:background="#2B497B" />
-
-                <TableLayout
-                    android:id="@+id/tableDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTimeOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="7:00 PM"
-                            android:textColor="#ffff" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/five" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/tvTempOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="25\u2103"
-                            android:textColor="#ffff"
-                            android:textSize="20sp" />
-                    </TableRow>
-                </TableLayout>
-
-                <View
-                    android:id="@+id/View01"
-                    android:layout_width="2dip"
-                    android:layout_height="130dip"
-                    android:background="#2B497B" />
+               
             </LinearLayout>
         </HorizontalScrollView>
     </RelativeLayout>

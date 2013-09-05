@@ -987,7 +987,7 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
-        public static final int action_settings=0x7f050090;
+        public static final int action_settings=0x7f05009e;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050027;
         public static final int flMiddle=0x7f05006b;
@@ -997,9 +997,9 @@ containing a value of this type.
         public static final int ivLocation=0x7f050063;
         public static final int ivMondayImage=0x7f050036;
         public static final int ivWeatherCondition=0x7f05006d;
-        public static final int lin_lay=0x7f05008e;
+        public static final int lin_lay=0x7f05009c;
         public static final int listMode=0x7f050002;
-        public static final int logo=0x7f05008f;
+        public static final int logo=0x7f05009d;
         public static final int normal=0x7f050001;
         public static final int rlFav1=0x7f05005b;
         public static final int rlMonday=0x7f050035;
@@ -1073,10 +1073,24 @@ containing a value of this type.
         public static final int tvSunsetValue=0x7f05007a;
         public static final int tvTempMaxValue=0x7f050071;
         public static final int tvTempMinValue=0x7f05007e;
-        public static final int tvTempOne=0x7f05008b;
         public static final int tvTemparature=0x7f05006c;
+        public static final int tvTime12AM=0x7f05008a;
+        public static final int tvTime12AMValue=0x7f05008b;
+        public static final int tvTime12PM=0x7f050093;
+        public static final int tvTime12PMValue=0x7f050094;
+        public static final int tvTime3AM=0x7f05008d;
+        public static final int tvTime3AMValue=0x7f05008e;
+        public static final int tvTime3PM=0x7f050095;
+        public static final int tvTime3PMValue=0x7f050096;
+        public static final int tvTime6AM=0x7f05008f;
+        public static final int tvTime6AMValue=0x7f050090;
+        public static final int tvTime6PM=0x7f050097;
+        public static final int tvTime6PMValue=0x7f050098;
+        public static final int tvTime9AM=0x7f050091;
+        public static final int tvTime9AMValue=0x7f050092;
+        public static final int tvTime9PM=0x7f050099;
+        public static final int tvTime9PMValue=0x7f05009a;
         public static final int tvTimeCurrent=0x7f050068;
-        public static final int tvTimeOne=0x7f05008a;
         public static final int tvUpdateTime=0x7f050062;
         public static final int tvWind=0x7f050080;
         public static final int tvWindDirection=0x7f050083;
@@ -1089,7 +1103,7 @@ containing a value of this type.
         public static final int tvtempMin=0x7f05007d;
         public static final int useLogo=0x7f050004;
         public static final int viewTime=0x7f050061;
-        public static final int vpTest=0x7f05008d;
+        public static final int vpTest=0x7f05009b;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {

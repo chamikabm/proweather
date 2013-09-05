@@ -10,18 +10,24 @@ import android.widget.Toast;
 public class BaseFragment extends Fragment {
 
 	private AsyncDataLoader asyncDataLoader;
+
 	
-	protected void executeBackgroundTask(String url) {
+	protected void executeBackgroundTask(String url,boolean isMain) {
 		
 		if(Utils.isDataConnectionAvailable((Context) getActivity())) {
-			asyncDataLoader = new AsyncDataLoader(this);
-			asyncDataLoader.execute(Constants.LOCATION_WEATHER_URL);
+			asyncDataLoader = new AsyncDataLoader(this,isMain);
+			asyncDataLoader.execute(url);
 		} else {
+			//Use to notify the user if ther is no Data Connection is available.
 			Toast.makeText((Context) getActivity(), "Data Connection is not available", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
 	public void onTaskFinished(String result) {
+		
+	}
+	
+	public void onSubTaskFinished(String result){
 		
 	}
 	

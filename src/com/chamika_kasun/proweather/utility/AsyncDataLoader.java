@@ -15,13 +15,15 @@ import com.chamika_kasun.proweather.base.BaseFragment;
 import android.os.AsyncTask;
 
 public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
-	
+
 	private BaseFragment baseFragment;
-	
-	public AsyncDataLoader(BaseFragment baseFragment) {
+	private boolean isMainTask;
+
+	public AsyncDataLoader(BaseFragment baseFragment, boolean isMainTask) {
 		this.baseFragment = baseFragment;
+		this.isMainTask = isMainTask;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
@@ -29,32 +31,33 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
-		
+
 		String url = null;
 		if (params != null && params.length > 0) {
 			url = params[0];
 		} else {
 			return null;
 		}
-		
+
 		InputStream is = null;
 		HttpPost httppost;
 		String result = null;
-		
+
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
 			httppost = new HttpPost(url);
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
 			is = entity.getContent();
-			
- 		} catch (IOException e) {
+
+		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
-				
+
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					is, "iso-8859-1"), 8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
@@ -68,12 +71,16 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-		if(baseFragment != null) {
-			baseFragment.onTaskFinished(result);
+		if (baseFragment != null) {
+			if (isMainTask) {
+				baseFragment.onTaskFinished(result);
+			} else {
+				baseFragment.onSubTaskFinished(result);
+			}
 		}
 	}
 
