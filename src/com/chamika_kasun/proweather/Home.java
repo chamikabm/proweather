@@ -1,32 +1,34 @@
 package com.chamika_kasun.proweather;
 
+import java.io.IOException;
 import java.util.Calendar;
-
+import java.util.List;
+import java.util.Locale;
 import com.chamika_kasun.proweather.base.BaseFragment;
 import com.chamika_kasun.proweather.objects.HourlyWeather;
 import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.JSONParser;
 import com.chamika_kasun.proweather.utility.Utils;
+import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,9 @@ public class Home extends BaseFragment {
 			windSpeed, windDirection, pressure, tvTime12AMValue,
 			tvTime3AMValue, tvTime6AMValue, tvTime9AMValue, tvTime12PMValue,
 			tvTime3PMValue, tvTime6PMValue, tvTime9PMValue;
+
+	Double lattitude = 21.0;
+	Double longitude = 7.0;
 
 	// Define location Button
 	ImageView locationButton;
@@ -98,51 +103,90 @@ public class Home extends BaseFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-//				Dialog d = new Dialog((Context) getActivity());
-//				d.setContentView(R.layout.homepopup);
-//				d.setS
-//				d.setTitle("Get Location");
-//				d.show();
-//
-//				WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//				lp.copyFrom(d.getWindow().getAttributes());
-//				lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//				lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//				d.getWindow().setAttributes(lp);
-//				d.setCancelable(true);
-				
-				final String[] choices = new String[]{"Using Google Map", "Manual Input"};
-				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+				// Dialog d = new Dialog((Context) getActivity());
+				// d.setContentView(R.layout.homepopup);
+				// d.setS
+				// d.setTitle("Get Location");
+				// d.show();
+				//
+				// WindowManager.LayoutParams lp = new
+				// WindowManager.LayoutParams();
+				// lp.copyFrom(d.getWindow().getAttributes());
+				// lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+				// lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+				// d.getWindow().setAttributes(lp);
+				// d.setCancelable(true);
+
+				final String[] choices = new String[] { "Using Google Map",
+						"Manual Input" };
+				AlertDialog.Builder alert = new AlertDialog.Builder(
+						getActivity());
 				alert.setTitle("Get Location");
 				alert.setItems(choices, new DialogInterface.OnClickListener() {
-					
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						
-						switch(which) {
+
+						switch (which) {
 						case 0:
 							// Using google maps
+							startActivity(new Intent((Context) getActivity(),
+									GoogleMapActivity.class));
+
 							break;
-							
+
 						case 1:
 							// manual search
-							Dialog d = new Dialog((Context) getActivity());
+							final Dialog d = new Dialog((Context) getActivity());
 							d.setContentView(R.layout.manualinputlocation);
 							d.setTitle("Input Location");
 							d.show();
-			
+
 							WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 							lp.copyFrom(d.getWindow().getAttributes());
 							lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 							lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 							d.getWindow().setAttributes(lp);
 							d.setCancelable(true);
+
+							final EditText etCountry = (EditText) d
+									.findViewById(R.id.etCountry);
+							final EditText etCity = (EditText) d
+									.findViewById(R.id.etCity);
+							Button done = (Button) d
+									.findViewById(R.id.bGetManulaInputData);
+							done.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									d.dismiss();
+
+									String city = etCity.getText().toString();
+									// replaceAll("\\s+", ""); this methos is
+									// use to remove white spaces
+									// Between Country Names. Sri Lanka -->
+									// SriLanka
+									String country = etCountry.getText()
+											.toString().replaceAll("\\s+", "");
+
+									executeBackgroundTask(
+											Constants.LOCATION_WEATHER_URL + ""
+													+ city + "," + country,
+											true);
+									executeBackgroundTask(
+											Constants.LOCATION_WEATHER_HOURLY_URL
+													+ "" + city + "," + country,
+											false);
+								}
+							});
+
 							break;
 						}
 					}
 				});
-				
+
 				alert.show();
 
 			}
@@ -150,9 +194,32 @@ public class Home extends BaseFragment {
 
 		// Code Sniffet for the Popup Window End
 
-		// Calling background process
-		executeBackgroundTask(Constants.LOCATION_WEATHER_URL, true);
-		executeBackgroundTask(Constants.LOCATION_WEATHER_HOURLY_URL, false);
+		LocationInfo latestInfo = new LocationInfo((Context) getActivity());
+		lattitude = (double) latestInfo.lastLat;
+		longitude = (double) latestInfo.lastLong;
+
+		Geocoder gcd = new Geocoder(getActivity().getBaseContext(),
+				Locale.getDefault());
+		List<Address> addresses = null;
+		try {
+			addresses = gcd.getFromLocation(lattitude, longitude, 1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (addresses.size() > 0) {
+
+			Log.v("Location | City", "City 3 : "
+					+ addresses.get(0).getLocality());
+			Log.v("Location | Country", "Country 3 : "
+					+ addresses.get(0).getCountryName());
+		}
+
+		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
+				+ "lat=" + lattitude + "&lon=" + longitude, true);
+		executeBackgroundTask(
+				Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="
+						+ lattitude + "&lon=" + longitude, false);
 
 		return convertView;
 
@@ -162,7 +229,16 @@ public class Home extends BaseFragment {
 	public void onTaskFinished(String result) {
 		super.onTaskFinished(result);
 
+		Log.v("Result Check", result);
+
 		if (result != null && result.length() > 0) {
+
+			// To make a popup notification when it is a Not Found Location
+			if (result.contains("404")) {
+				Toast.makeText((Context) getActivity(),
+						"Invalid Location Data", Toast.LENGTH_SHORT).show();
+				return;
+			}
 
 			// Method Call to Set the Time and the Date.
 			setTimeAndDate();
@@ -198,7 +274,8 @@ public class Home extends BaseFragment {
 
 			// Used to display an Error message if something went wrong while
 			// recieving the data
-			Toast.makeText((Context) getActivity(), "Error occured", Toast.LENGTH_SHORT).show();
+			Toast.makeText((Context) getActivity(), "Error occured",
+					Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -208,6 +285,13 @@ public class Home extends BaseFragment {
 		super.onSubTaskFinished(result);
 
 		if (result != null && result.length() > 0) {
+
+			// To make a popup notification when it is a Not Found Location
+			if (result.contains("404")) {
+				Toast.makeText((Context) getActivity(),
+						"Invalid Location Data", Toast.LENGTH_SHORT).show();
+				return;
+			}
 
 			HourlyWeather hwinfo = JSONParser.getLocationHorlyWeather(result);
 

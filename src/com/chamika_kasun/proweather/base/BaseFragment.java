@@ -12,7 +12,7 @@ public class BaseFragment extends Fragment {
 	private AsyncDataLoader asyncDataLoader;
 
 	
-	protected void executeBackgroundTask(String url,boolean isMain) {
+	public void executeBackgroundTask(String url,boolean isMain) {
 		
 		if(Utils.isDataConnectionAvailable((Context) getActivity())) {
 			asyncDataLoader = new AsyncDataLoader(this,isMain);

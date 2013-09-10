@@ -12,7 +12,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.chamika_kasun.proweather.base.BaseFragment;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
 
 public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 
@@ -74,6 +77,11 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 
 	@Override
 	protected void onPostExecute(String result) {
+		
+		if(result.contains("404")){
+			return;
+		}
+						
 		super.onPostExecute(result);
 		if (baseFragment != null) {
 			if (isMainTask) {
