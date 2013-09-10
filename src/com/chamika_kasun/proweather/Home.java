@@ -10,7 +10,10 @@ import com.chamika_kasun.proweather.utility.JSONParser;
 import com.chamika_kasun.proweather.utility.Utils;
 
 import android.app.ActionBar.LayoutParams;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -37,9 +41,6 @@ public class Home extends BaseFragment {
 
 	// Define location Button
 	ImageView locationButton;
-
-	// Varaibles for PopUp Window
-	PopupWindow popUp;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,23 +90,61 @@ public class Home extends BaseFragment {
 				.findViewById(R.id.tvTime9PMValue);
 
 		// Code Sniffet for the Popup Window Start
-
-		popUp = new PopupWindow((Context) getActivity());
-		LinearLayout layout = new LinearLayout((Context) getActivity());
-		layout.setOrientation(LinearLayout.VERTICAL);
-		TextView tv = new TextView((Context) getActivity());
-		tv.setText("This is a Sample Pop Up");
-		layout.addView(tv);
-		popUp.setContentView(layout);
-
-		// Initialize the Location Button(Image View)
 		locationButton = (ImageView) convertView.findViewById(R.id.ivLocation);
+
 		locationButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				popUp.showAtLocation(convertView, Gravity.BOTTOM, 10, 10);
-				popUp.update(50, 50, 300, 80);
+				// TODO Auto-generated method stub
+
+//				Dialog d = new Dialog((Context) getActivity());
+//				d.setContentView(R.layout.homepopup);
+//				d.setS
+//				d.setTitle("Get Location");
+//				d.show();
+//
+//				WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//				lp.copyFrom(d.getWindow().getAttributes());
+//				lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//				lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//				d.getWindow().setAttributes(lp);
+//				d.setCancelable(true);
+				
+				final String[] choices = new String[]{"Using Google Map", "Manual Input"};
+				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+				alert.setTitle("Get Location");
+				alert.setItems(choices, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						
+						switch(which) {
+						case 0:
+							// Using google maps
+							break;
+							
+						case 1:
+							// manual search
+							Dialog d = new Dialog((Context) getActivity());
+							d.setContentView(R.layout.manualinputlocation);
+							d.setTitle("Input Location");
+							d.show();
+			
+							WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+							lp.copyFrom(d.getWindow().getAttributes());
+							lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+							lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+							d.getWindow().setAttributes(lp);
+							d.setCancelable(true);
+							break;
+						}
+					}
+				});
+				
+				alert.show();
+
 			}
 		});
 
@@ -122,8 +161,8 @@ public class Home extends BaseFragment {
 	@Override
 	public void onTaskFinished(String result) {
 		super.onTaskFinished(result);
-		
-		if (result != null) {
+
+		if (result != null && result.length() > 0) {
 
 			// Method Call to Set the Time and the Date.
 			setTimeAndDate();
@@ -159,8 +198,7 @@ public class Home extends BaseFragment {
 
 			// Used to display an Error message if something went wrong while
 			// recieving the data
-			Toast.makeText((Context) getActivity(), "Error occured",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText((Context) getActivity(), "Error occured", Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -169,7 +207,7 @@ public class Home extends BaseFragment {
 	public void onSubTaskFinished(String result) {
 		super.onSubTaskFinished(result);
 
-		if (result != null) {
+		if (result != null && result.length() > 0) {
 
 			HourlyWeather hwinfo = JSONParser.getLocationHorlyWeather(result);
 

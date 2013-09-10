@@ -95,8 +95,6 @@ public class JSONParser {
 			JSONObject main12AM = obj12AM.getJSONObject("main");
 			float obj12AMTemarature = Float.parseFloat(main12AM.getString("temp"));
 			
-			Log.v("12AM", "Log "+obj12AM.getString("dt"));
-			
 			JSONArray wetherIcon12AMArray = obj12AM.getJSONArray("weather");
 			JSONObject wetherIcon12AM = wetherIcon12AMArray.getJSONObject(0);
 			String obj12AMICON = wetherIcon12AM.getString("icon");

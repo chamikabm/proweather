@@ -987,9 +987,14 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
-        public static final int action_settings=0x7f05009e;
+        public static final int action_settings=0x7f0500a7;
+        public static final int bGetManulaInputData=0x7f0500a4;
+        public static final int bInputLocation=0x7f05009e;
+        public static final int bMap=0x7f05009c;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050027;
+        public static final int etCity=0x7f0500a3;
+        public static final int etCountry=0x7f0500a1;
         public static final int flMiddle=0x7f05006b;
         public static final int homeAsUp=0x7f050006;
         public static final int horizontalScrollView1=0x7f050088;
@@ -997,9 +1002,9 @@ containing a value of this type.
         public static final int ivLocation=0x7f050063;
         public static final int ivMondayImage=0x7f050036;
         public static final int ivWeatherCondition=0x7f05006d;
-        public static final int lin_lay=0x7f05009c;
+        public static final int lin_lay=0x7f0500a5;
         public static final int listMode=0x7f050002;
-        public static final int logo=0x7f05009d;
+        public static final int logo=0x7f0500a6;
         public static final int normal=0x7f050001;
         public static final int rlFav1=0x7f05005b;
         public static final int rlMonday=0x7f050035;
@@ -1039,6 +1044,8 @@ containing a value of this type.
         public static final int trMondayOverView=0x7f050034;
         public static final int trMondayTAPButton=0x7f050056;
         public static final int trTimeAndDate=0x7f050066;
+        public static final int tvCity=0x7f0500a2;
+        public static final int tvCountry=0x7f0500a0;
         public static final int tvDay=0x7f05006a;
         public static final int tvDayWord=0x7f050069;
         public static final int tvFavLocation1=0x7f05005d;
@@ -1047,7 +1054,9 @@ containing a value of this type.
         public static final int tvFavLocation1NightTemparature=0x7f050060;
         public static final int tvHumidity=0x7f050073;
         public static final int tvHumidityValue=0x7f050074;
+        public static final int tvInput=0x7f05009d;
         public static final int tvLocation=0x7f050064;
+        public static final int tvMap=0x7f05009b;
         public static final int tvModayDescription=0x7f050038;
         public static final int tvMondayChanceOfRain=0x7f05003f;
         public static final int tvMondayChanceOfRainValue=0x7f050040;
@@ -1103,7 +1112,7 @@ containing a value of this type.
         public static final int tvtempMin=0x7f05007d;
         public static final int useLogo=0x7f050004;
         public static final int viewTime=0x7f050061;
-        public static final int vpTest=0x7f05009b;
+        public static final int vpTest=0x7f05009f;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {
@@ -1137,10 +1146,12 @@ containing a value of this type.
         public static final int detailed=0x7f030018;
         public static final int favourites=0x7f030019;
         public static final int home=0x7f03001a;
-        public static final int main=0x7f03001b;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
-        public static final int sherlock_spinner_item=0x7f03001d;
-        public static final int splashscreen=0x7f03001e;
+        public static final int homepopup=0x7f03001b;
+        public static final int main=0x7f03001c;
+        public static final int manualinputlocation=0x7f03001d;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001e;
+        public static final int sherlock_spinner_item=0x7f03001f;
+        public static final int splashscreen=0x7f030020;
     }
     public static final class menu {
         public static final int splash_screen=0x7f0c0000;
