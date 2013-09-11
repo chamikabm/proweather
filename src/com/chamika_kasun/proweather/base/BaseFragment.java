@@ -15,7 +15,7 @@ public class BaseFragment extends Fragment {
 	public void executeBackgroundTask(String url,boolean isMain) {
 		
 		if(Utils.isDataConnectionAvailable((Context) getActivity())) {
-			asyncDataLoader = new AsyncDataLoader(this,isMain);
+			asyncDataLoader = new AsyncDataLoader(this,isMain,(Context)getActivity());
 			asyncDataLoader.execute(url);
 		} else {
 			//Use to notify the user if ther is no Data Connection is available.

@@ -10,21 +10,29 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.chamika_kasun.proweather.R;
 import com.chamika_kasun.proweather.base.BaseFragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 
 	private BaseFragment baseFragment;
 	private boolean isMainTask;
+	private Context context;
 
-	public AsyncDataLoader(BaseFragment baseFragment, boolean isMainTask) {
+	public AsyncDataLoader(BaseFragment baseFragment, boolean isMainTask,Context context) {
 		this.baseFragment = baseFragment;
 		this.isMainTask = isMainTask;
+		this.context = context;
 	}
 
 	@Override
@@ -79,6 +87,23 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 	protected void onPostExecute(String result) {
 		
 		if(result.contains("404")){
+			Toast.makeText(context,
+					"Invalid Location Data", Toast.LENGTH_SHORT).show();
+			
+//			 Dialog d = new Dialog(context);
+//			 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//			 d.setContentView(R.layout.homepopup);
+//			 
+//			 d.show();
+//			
+//			 WindowManager.LayoutParams lp = new
+//			 WindowManager.LayoutParams();
+//			 lp.copyFrom(d.getWindow().getAttributes());
+//			 lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//			 lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//			 d.getWindow().setAttributes(lp);
+//			 d.setCancelable(true);
+			
 			return;
 		}
 						

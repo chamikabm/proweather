@@ -10,8 +10,8 @@ import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.JSONParser;
 import com.chamika_kasun.proweather.utility.Utils;
-import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends BaseFragment {
+	
+	//COnstant
+	private final static int MAP_ACTIVITY_REQUEST_CODE = 0;
 
 	// Define all the TextViews that in the home XML
 	TextView updateTime, location, time, dayWord, day, temperature,
@@ -41,8 +45,8 @@ public class Home extends BaseFragment {
 			tvTime3AMValue, tvTime6AMValue, tvTime9AMValue, tvTime12PMValue,
 			tvTime3PMValue, tvTime6PMValue, tvTime9PMValue;
 
-	Double lattitude = 21.0;
-	Double longitude = 7.0;
+	Double lattitude;
+	Double longitude;
 
 	// Define location Button
 	ImageView locationButton;
@@ -94,6 +98,19 @@ public class Home extends BaseFragment {
 		tvTime9PMValue = (TextView) convertView
 				.findViewById(R.id.tvTime9PMValue);
 
+		// Create a Timer
+		final Handler h = new Handler();
+		h.post(new Runnable() {
+			@Override
+			public void run() {
+				setTimeAndDate();
+				h.postDelayed(this, 1000);
+			}
+		});
+		
+		//Set Update Time
+		setUpdateTime();
+
 		// Code Sniffet for the Popup Window Start
 		locationButton = (ImageView) convertView.findViewById(R.id.ivLocation);
 
@@ -131,8 +148,8 @@ public class Home extends BaseFragment {
 						switch (which) {
 						case 0:
 							// Using google maps
-							startActivity(new Intent((Context) getActivity(),
-									GoogleMapActivity.class));
+							startActivityForResult(new Intent((Context) getActivity(),
+									GoogleMapActivity.class),MAP_ACTIVITY_REQUEST_CODE);
 
 							break;
 
@@ -164,10 +181,8 @@ public class Home extends BaseFragment {
 									d.dismiss();
 
 									String city = etCity.getText().toString();
-									// replaceAll("\\s+", ""); this methos is
-									// use to remove white spaces
-									// Between Country Names. Sri Lanka -->
-									// SriLanka
+									// replaceAll("\\s+", ""); this methos is use to remove white spaces
+									// Between Country Names. Sri Lanka --> SriLanka
 									String country = etCountry.getText()
 											.toString().replaceAll("\\s+", "");
 
@@ -194,9 +209,18 @@ public class Home extends BaseFragment {
 
 		// Code Sniffet for the Popup Window End
 
-		LocationInfo latestInfo = new LocationInfo((Context) getActivity());
-		lattitude = (double) latestInfo.lastLat;
-		longitude = (double) latestInfo.lastLong;
+		// LocationInfo latestInfo = new LocationInfo((Context) getActivity());
+		//
+		// lattitude = (double) latestInfo.lastLat;
+		// Log.v("Latitude", "Latitude : "+lattitude);
+		// longitude = (double) latestInfo.lastLong;
+		// Log.v("Longitude", "Longitude : "+longitude);
+
+		GPSTracker gps = new GPSTracker((Context) getActivity());
+
+		// Get Location Latitude and Longitude
+		lattitude = gps.getLatitude();
+		longitude = gps.getLongitude();
 
 		Geocoder gcd = new Geocoder(getActivity().getBaseContext(),
 				Locale.getDefault());
@@ -205,7 +229,14 @@ public class Home extends BaseFragment {
 			addresses = gcd.getFromLocation(lattitude, longitude, 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+
+			Toast.makeText((Context) getActivity(),
+					"Data Connection is Not Available", Toast.LENGTH_SHORT)
+					.show();
+
+			return convertView;
 		}
 		if (addresses.size() > 0) {
 
@@ -233,15 +264,7 @@ public class Home extends BaseFragment {
 
 		if (result != null && result.length() > 0) {
 
-			// To make a popup notification when it is a Not Found Location
-			if (result.contains("404")) {
-				Toast.makeText((Context) getActivity(),
-						"Invalid Location Data", Toast.LENGTH_SHORT).show();
-				return;
-			}
-
 			// Method Call to Set the Time and the Date.
-			setTimeAndDate();
 
 			// Get the current Weather information through the JSON parse
 			Weather weatherInfo = JSONParser.getLocationWeather(result);
@@ -285,13 +308,6 @@ public class Home extends BaseFragment {
 		super.onSubTaskFinished(result);
 
 		if (result != null && result.length() > 0) {
-
-			// To make a popup notification when it is a Not Found Location
-			if (result.contains("404")) {
-				Toast.makeText((Context) getActivity(),
-						"Invalid Location Data", Toast.LENGTH_SHORT).show();
-				return;
-			}
 
 			HourlyWeather hwinfo = JSONParser.getLocationHorlyWeather(result);
 
@@ -395,9 +411,11 @@ public class Home extends BaseFragment {
 		}
 
 		// Used to Convert the 24Hr time to 12Hr System.
-		if (hour >= 12) {
+		if (hour > 12) {
 			txt = "PM";
 			hour = hour - 12;
+		} else if (hour == 12) {
+			txt = "PM";
 		} else {
 			txt = "AM";
 		}
@@ -424,4 +442,55 @@ public class Home extends BaseFragment {
 
 		return temparetureCelcius;
 	}
+	
+	public void setUpdateTime(){
+		// In built Java Function used to get the Current Date and the Time.
+				String txt = "";
+				
+				Calendar c = Calendar.getInstance();
+
+				int hour = c.get(Calendar.HOUR_OF_DAY);
+				String sminute = "" + c.get(Calendar.MINUTE);
+				
+				if (hour > 12) {
+					txt = "PM";
+					hour = hour - 12;
+				} else if (hour == 12) {
+					txt = "PM";
+				} else {
+					txt = "AM";
+				}
+				
+				updateTime.setText("Updated Time : "+hour+" : "+sminute+""+txt);
+				
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == MAP_ACTIVITY_REQUEST_CODE ){
+			if(resultCode == Activity.RESULT_OK){
+				
+				Bundle bundleLocation = new Bundle();
+				bundleLocation = data.getExtras();
+				
+				String newLattitude = bundleLocation.getString("Lattitude");
+				String newLongitude = bundleLocation.getString("Longitude");				
+				
+				executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
+						+ "lat=" + newLattitude + "&lon=" + newLongitude, true);
+				executeBackgroundTask(
+						Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="
+								+ newLattitude + "&lon=" + newLongitude, false);
+				
+			}else{
+				Toast.makeText((Context) getActivity(), "Error occured",
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	
 }

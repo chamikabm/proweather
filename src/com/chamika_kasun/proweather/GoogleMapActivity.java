@@ -19,8 +19,13 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
@@ -37,6 +42,9 @@ public class GoogleMapActivity extends MapActivity {
 
 	// Map View
 	MapView mapView;
+	
+	//Button for Get Selected Location Weather
+	Button getLocationWeather;
 
 	// Data
 	int radius;
@@ -49,6 +57,8 @@ public class GoogleMapActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+			
+		
 		LocationLibrary.initialiseLibrary(getBaseContext(),
 				"com.chamika_kasun.googlemaps");
 
@@ -106,16 +116,37 @@ public class GoogleMapActivity extends MapActivity {
 				}
 			});
 
+			
+			getLocationWeather = (Button) findViewById(R.id.bGetLocationWeather);
+			getLocationWeather.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Bundle bundleLocation = new Bundle();
+					bundleLocation.putString("Lattitude", lattitude.toString());
+					bundleLocation.putString("Longitude", longitude.toString());
+					
+					Intent intent = getIntent();
+					intent.putExtras(bundleLocation);
+					
+					setResult(Activity.RESULT_OK, intent);
+					
+					finish();
+					
+				}
+			});
+			
 			// Create Instance of GPSTracker to get Location
 			gps = new GPSTracker(GoogleMapActivity.this);
 
 			// Get Location Latitude and Longitude
-			double latitude = gps.getLatitude();
-			double longitude = gps.getLongitude();
+			double lat= gps.getLatitude();
+			double longt = gps.getLongitude();
 
 			// Get City Name of Location
 			Geocoder gcd = new Geocoder(this, Locale.getDefault());
-			List<Address> addresses = gcd.getFromLocation(latitude, longitude,
+			List<Address> addresses = gcd.getFromLocation(lat, longt,
 					1);
 			if (addresses.size() > 0) {
 				System.out.println("City : " + addresses.get(0).getLocality());
@@ -129,7 +160,7 @@ public class GoogleMapActivity extends MapActivity {
 
 			// create marker
 			MarkerOptions marker = new MarkerOptions().position(
-					new LatLng(latitude, longitude)).title("Your are Here!");
+					new LatLng(lat, longt)).title("Your are Here!");
 
 			// Changing marker icon
 			marker.icon(BitmapDescriptorFactory
@@ -140,7 +171,7 @@ public class GoogleMapActivity extends MapActivity {
 
 			// Add a Camera Position
 			CameraPosition cameraPosition = new CameraPosition.Builder()
-					.target(new LatLng(latitude, longitude)).zoom(12).build();
+					.target(new LatLng(lat, longt)).zoom(12).build();
 
 			// Move camera with an Animation
 			googleMap.animateCamera(CameraUpdateFactory

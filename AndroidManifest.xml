@@ -39,7 +39,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
         <service android:name="com.littlefluffytoys.littlefluffylocationlibrary.LocationBroadcastService" />
 
         <receiver
@@ -49,15 +48,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        
         <receiver
             android:name="com.littlefluffytoys.littlefluffylocationlibrary.PassiveLocationChangedReceiver"
             android:exported="true" />
-        
-        
+
         <activity
             android:name="com.chamika_kasun.proweather.SplashScreen"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,26 +63,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.chamika_kasun.proweather.FragmentsActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.chamika_kasun.proweather.GoogleMapActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >            
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
         </activity>
-        
+
         <!-- Goolge API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBcgmZI9hboz4B_Okvfyw3_8HwT4cK4-nM" />
 
         <uses-library android:name="com.google.android.maps" />
-        
     </application>
 
 </manifest>

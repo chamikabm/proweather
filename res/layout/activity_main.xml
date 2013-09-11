@@ -14,4 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+  <Button
+      android:id="@+id/bGetLocationWeather"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/map"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="15dp"
+      android:gravity="center"
+      android:text="View This Location Weather" />
+
 </RelativeLayout>
