@@ -36,8 +36,11 @@ import android.widget.Toast;
 
 public class Home extends BaseFragment {
 
-	// COnstant
+	// C0nstant
 	private final static int MAP_ACTIVITY_REQUEST_CODE = 0;
+
+	private double lattitude;
+	private double longitude;
 
 	// Define all the TextViews that in the home XML
 	TextView updateTime, location, time, dayWord, day, temperature,
@@ -45,9 +48,6 @@ public class Home extends BaseFragment {
 			windSpeed, windDirection, pressure, tvTime12AMValue,
 			tvTime3AMValue, tvTime6AMValue, tvTime9AMValue, tvTime12PMValue,
 			tvTime3PMValue, tvTime6PMValue, tvTime9PMValue;
-
-	public Double lattitude;
-	public Double longitude;
 
 	// Define location Button
 	ImageView locationButton;
@@ -142,7 +142,7 @@ public class Home extends BaseFragment {
 							break;
 
 						case 1:
-							// manual search
+							// Manual search
 							final Dialog d = new Dialog((Context) getActivity());
 							d.setContentView(R.layout.manualinputlocation);
 							d.setTitle("Input Location");
@@ -199,22 +199,28 @@ public class Home extends BaseFragment {
 
 		// Code Sniffet for the Popup Window End
 
-		//################################################################################
-		 LocationInfo latestInfo = new LocationInfo((Context) getActivity());	
-		
-		 lattitude = (double) latestInfo.lastLat;
-		 Log.v("Latitude", "Latitude : "+lattitude);
-		 longitude = (double) latestInfo.lastLong;
-		 Log.v("Longitude", "Longitude : "+longitude);
-		//
-		//#################################################################################
+		// ################################################################################
 
-//		This Code is not Working now. But Worked Earlier
-//		GPSTracker gps = new GPSTracker((Context) getActivity());
-//
-//		// Get Location Latitude and Longitude
-//		lattitude = gps.getLatitude();
-//		longitude = gps.getLongitude();
+		// This Code is not Working now. But Worked Earlier
+		// LocationInfo latestInfo = new LocationInfo((Context) getActivity());
+		//
+		// lattitude = (double) latestInfo.lastLat;
+		// Log.v("Latitude", "Latitude : "+lattitude);
+		// longitude = (double) latestInfo.lastLong;
+		// Log.v("Longitude", "Longitude : "+longitude);
+
+		// ((FragmentsActivity)getActivity()).setLattitude((double)
+		// latestInfo.lastLat);
+		// ((FragmentsActivity)getActivity()).setLattitude((double)
+		// latestInfo.lastLong);
+
+		// #################################################################################
+
+		GPSTracker gps = new GPSTracker((Context) getActivity());
+
+		// Get Location Latitude and Longitude
+		lattitude = gps.getLatitude();
+		longitude = gps.getLongitude();
 
 		Geocoder gcd = new Geocoder(getActivity().getBaseContext(),
 				Locale.getDefault());
@@ -222,7 +228,6 @@ public class Home extends BaseFragment {
 		try {
 			addresses = gcd.getFromLocation(lattitude, longitude, 1);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 
 			e.printStackTrace();
 
@@ -234,15 +239,12 @@ public class Home extends BaseFragment {
 		}
 		if (addresses.size() > 0) {
 
-			Log.v("Location | City", "City 3 : "
-					+ addresses.get(0).getLocality());
-			Log.v("Location | Country", "Country 3 : "
+			Log.v("Location | City", "City: " + addresses.get(0).getLocality());
+			Log.v("Location | Country", "Country: "
 					+ addresses.get(0).getCountryName());
 		}
 
-
-		
-		runBackgroudTasks(lattitude,longitude);
+		runBackgroudTasks(lattitude, longitude);
 
 		return convertView;
 
@@ -460,7 +462,6 @@ public class Home extends BaseFragment {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == MAP_ACTIVITY_REQUEST_CODE) {
@@ -487,7 +488,7 @@ public class Home extends BaseFragment {
 		}
 	}
 
-	public void runBackgroudTasks(Double lattitude2, Double longitude2) {
+	public void runBackgroudTasks(double lattitude2, double longitude2) {
 
 		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
 				+ "lat=" + lattitude2 + "&lon=" + longitude2, true);

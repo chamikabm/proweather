@@ -17,7 +17,7 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 	private ViewPager viewPager;
 	private ActionBar actionBar;
 	private final static String ACTIVE_TAB = "active_tab";
-	
+
 	public TabsAdapter tabsAdapter;
 	
 	@Override
