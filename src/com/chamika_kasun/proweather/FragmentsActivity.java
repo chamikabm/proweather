@@ -1,9 +1,11 @@
 package com.chamika_kasun.proweather;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar;
@@ -16,11 +18,14 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 	private ActionBar actionBar;
 	private final static String ACTIVE_TAB = "active_tab";
 	
+	public TabsAdapter tabsAdapter;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.main);
 		initialize();
+		
 	}
 
 	private void initialize() {
@@ -60,7 +65,7 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 
 	private void setupPager() {
 		// TODO Auto-generated method stub
-		TabsAdapter tabsAdapter = new TabsAdapter(getSupportFragmentManager());
+		tabsAdapter = new TabsAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(tabsAdapter);
 		
 	}

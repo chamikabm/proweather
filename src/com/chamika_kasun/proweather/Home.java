@@ -10,6 +10,7 @@ import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.JSONParser;
 import com.chamika_kasun.proweather.utility.Utils;
+import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,8 +35,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends BaseFragment {
-	
-	//COnstant
+
+	// COnstant
 	private final static int MAP_ACTIVITY_REQUEST_CODE = 0;
 
 	// Define all the TextViews that in the home XML
@@ -45,8 +46,8 @@ public class Home extends BaseFragment {
 			tvTime3AMValue, tvTime6AMValue, tvTime9AMValue, tvTime12PMValue,
 			tvTime3PMValue, tvTime6PMValue, tvTime9PMValue;
 
-	Double lattitude;
-	Double longitude;
+	public Double lattitude;
+	public Double longitude;
 
 	// Define location Button
 	ImageView locationButton;
@@ -107,8 +108,8 @@ public class Home extends BaseFragment {
 				h.postDelayed(this, 1000);
 			}
 		});
-		
-		//Set Update Time
+
+		// Set Update Time
 		setUpdateTime();
 
 		// Code Sniffet for the Popup Window Start
@@ -118,21 +119,6 @@ public class Home extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-				// Dialog d = new Dialog((Context) getActivity());
-				// d.setContentView(R.layout.homepopup);
-				// d.setS
-				// d.setTitle("Get Location");
-				// d.show();
-				//
-				// WindowManager.LayoutParams lp = new
-				// WindowManager.LayoutParams();
-				// lp.copyFrom(d.getWindow().getAttributes());
-				// lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-				// lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-				// d.getWindow().setAttributes(lp);
-				// d.setCancelable(true);
 
 				final String[] choices = new String[] { "Using Google Map",
 						"Manual Input" };
@@ -148,8 +134,10 @@ public class Home extends BaseFragment {
 						switch (which) {
 						case 0:
 							// Using google maps
-							startActivityForResult(new Intent((Context) getActivity(),
-									GoogleMapActivity.class),MAP_ACTIVITY_REQUEST_CODE);
+							startActivityForResult(new Intent(
+									(Context) getActivity(),
+									GoogleMapActivity.class),
+									MAP_ACTIVITY_REQUEST_CODE);
 
 							break;
 
@@ -181,8 +169,10 @@ public class Home extends BaseFragment {
 									d.dismiss();
 
 									String city = etCity.getText().toString();
-									// replaceAll("\\s+", ""); this methos is use to remove white spaces
-									// Between Country Names. Sri Lanka --> SriLanka
+									// replaceAll("\\s+", ""); this methos is
+									// use to remove white spaces
+									// Between Country Names. Sri Lanka -->
+									// SriLanka
 									String country = etCountry.getText()
 											.toString().replaceAll("\\s+", "");
 
@@ -209,18 +199,22 @@ public class Home extends BaseFragment {
 
 		// Code Sniffet for the Popup Window End
 
-		// LocationInfo latestInfo = new LocationInfo((Context) getActivity());
+		//################################################################################
+		 LocationInfo latestInfo = new LocationInfo((Context) getActivity());	
+		
+		 lattitude = (double) latestInfo.lastLat;
+		 Log.v("Latitude", "Latitude : "+lattitude);
+		 longitude = (double) latestInfo.lastLong;
+		 Log.v("Longitude", "Longitude : "+longitude);
 		//
-		// lattitude = (double) latestInfo.lastLat;
-		// Log.v("Latitude", "Latitude : "+lattitude);
-		// longitude = (double) latestInfo.lastLong;
-		// Log.v("Longitude", "Longitude : "+longitude);
+		//#################################################################################
 
-		GPSTracker gps = new GPSTracker((Context) getActivity());
-
-		// Get Location Latitude and Longitude
-		lattitude = gps.getLatitude();
-		longitude = gps.getLongitude();
+//		This Code is not Working now. But Worked Earlier
+//		GPSTracker gps = new GPSTracker((Context) getActivity());
+//
+//		// Get Location Latitude and Longitude
+//		lattitude = gps.getLatitude();
+//		longitude = gps.getLongitude();
 
 		Geocoder gcd = new Geocoder(getActivity().getBaseContext(),
 				Locale.getDefault());
@@ -246,11 +240,9 @@ public class Home extends BaseFragment {
 					+ addresses.get(0).getCountryName());
 		}
 
-		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
-				+ "lat=" + lattitude + "&lon=" + longitude, true);
-		executeBackgroundTask(
-				Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="
-						+ lattitude + "&lon=" + longitude, false);
+
+		
+		runBackgroudTasks(lattitude,longitude);
 
 		return convertView;
 
@@ -267,7 +259,7 @@ public class Home extends BaseFragment {
 			// Method Call to Set the Time and the Date.
 
 			// Get the current Weather information through the JSON parse
-			Weather weatherInfo = JSONParser.getLocationWeather(result);
+			Weather weatherInfo = jsonParser.getLocationWeather(result);
 
 			int temp, maxTemp, minTemp;
 
@@ -309,7 +301,7 @@ public class Home extends BaseFragment {
 
 		if (result != null && result.length() > 0) {
 
-			HourlyWeather hwinfo = JSONParser.getLocationHorlyWeather(result);
+			HourlyWeather hwinfo = jsonParser.getLocationHorlyWeather(result);
 
 			// Assign valuse to TextViews.
 			tvTime12AMValue.setText(String
@@ -442,55 +434,66 @@ public class Home extends BaseFragment {
 
 		return temparetureCelcius;
 	}
-	
-	public void setUpdateTime(){
-		// In built Java Function used to get the Current Date and the Time.
-				String txt = "";
-				
-				Calendar c = Calendar.getInstance();
 
-				int hour = c.get(Calendar.HOUR_OF_DAY);
-				String sminute = "" + c.get(Calendar.MINUTE);
-				
-				if (hour > 12) {
-					txt = "PM";
-					hour = hour - 12;
-				} else if (hour == 12) {
-					txt = "PM";
-				} else {
-					txt = "AM";
-				}
-				
-				updateTime.setText("Updated Time : "+hour+" : "+sminute+""+txt);
-				
+	public void setUpdateTime() {
+		// In built Java Function used to get the Current Date and the Time.
+		String txt = "";
+
+		Calendar c = Calendar.getInstance();
+
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		String sminute = "" + c.get(Calendar.MINUTE);
+
+		if (hour > 12) {
+			txt = "PM";
+			hour = hour - 12;
+		} else if (hour == 12) {
+			txt = "PM";
+		} else {
+			txt = "AM";
+		}
+
+		updateTime.setText("Updated Time : " + hour + " : " + sminute + ""
+				+ txt);
+
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		
-		if(requestCode == MAP_ACTIVITY_REQUEST_CODE ){
-			if(resultCode == Activity.RESULT_OK){
-				
+
+		if (requestCode == MAP_ACTIVITY_REQUEST_CODE) {
+			if (resultCode == Activity.RESULT_OK) {
+
 				Bundle bundleLocation = new Bundle();
 				bundleLocation = data.getExtras();
-				
+
 				String newLattitude = bundleLocation.getString("Lattitude");
-				String newLongitude = bundleLocation.getString("Longitude");				
-				
-				executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
-						+ "lat=" + newLattitude + "&lon=" + newLongitude, true);
+				String newLongitude = bundleLocation.getString("Longitude");
+
 				executeBackgroundTask(
-						Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="
-								+ newLattitude + "&lon=" + newLongitude, false);
-				
-			}else{
+						Constants.LOCATION_WEATHER_URL_ON_COORDINATES + "lat="
+								+ newLattitude + "&lon=" + newLongitude, true);
+				executeBackgroundTask(
+						Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES
+								+ "lat=" + newLattitude + "&lon="
+								+ newLongitude, false);
+
+			} else {
 				Toast.makeText((Context) getActivity(), "Error occured",
 						Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
-	
-	
+
+	public void runBackgroudTasks(Double lattitude2, Double longitude2) {
+
+		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
+				+ "lat=" + lattitude2 + "&lon=" + longitude2, true);
+		executeBackgroundTask(
+				Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="
+						+ lattitude2 + "&lon=" + longitude2, false);
+
+	}
 }

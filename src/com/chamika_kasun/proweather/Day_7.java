@@ -1,19 +1,85 @@
 package com.chamika_kasun.proweather;
 
+import java.util.ArrayList;
+
+import com.chamika_kasun.proweather.base.BaseFragment;
+import com.chamika_kasun.proweather.objects.DayWeather;
+import com.chamika_kasun.proweather.objects.Wind;
+import com.chamika_kasun.proweather.utility.Constants;
+import com.chamika_kasun.proweather.utility.JSONParser;
+
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class Day_7 extends Fragment {
+public class Day_7 extends BaseFragment {
+
+	ListView listview;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
+		super.onCreateView(inflater, container, savedInstanceState);
+
 		View converView = inflater.inflate(R.layout.day_7, container, false);
+
+		listview = (ListView) converView.findViewById(R.id.lv7DayForcast);
+
+		executeBackgroundTask(Constants.LOCATION_7DAY_WEATHER_FORCAST_URL, true);
+		
+		
+		//########### Used For NUll Value and Other Testing
+		//executeBackgroundTask(Constants.LOCATION_7DAY_WEATHER_FORCAST_URL, true);
+		//
+		//		DayWeather dywthr = new DayWeather();
+		//		Wind windd = new Wind((float)1.41, (float)89);
+		//		
+		//		dywthr.setTemperature((float)25.6);
+		//		dywthr.setTemperatureMax((float)27.6);
+		//		dywthr.setTemperatureMin((float)23.5);
+		//		dywthr.setHumidity(80);
+		//		dywthr.setPressure((float)1002.5);
+		//		dywthr.setDescription("Heavy Rain");
+		//		dywthr.setIconCode("01d");
+		//		dywthr.setWind(windd);
+		//		
+		//		ArrayList<DayWeather> arrayList = new ArrayList<DayWeather>();		
+		//		arrayList.add(dywthr);
+		//		
+		//		SevenDayAdapter sevenDayAdapter = new SevenDayAdapter(
+		//				getActivity(), R.layout.sevendayrow, arrayList);
+		//		listview.setAdapter(sevenDayAdapter);
+		
 		return converView;
+
+	}
+
+	@Override
+	public void onTaskFinished(String result) {
+		super.onTaskFinished(result);
+
+		if (result != null && result.length() > 0) {
+
+			ArrayList<DayWeather> arrayList = jsonParser.getSevendayForecast(result);
+
+			if (arrayList != null) {
+
+				SevenDayAdapter sevenDayAdapter = new SevenDayAdapter(
+						getActivity(), R.layout.sevendayrow, arrayList);
+				listview.setAdapter(sevenDayAdapter);
+
+			}
+
+		} else {
+			Toast.makeText((Context) getActivity(), "Error occured",
+					Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 }

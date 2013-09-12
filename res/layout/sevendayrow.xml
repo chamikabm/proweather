@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+   <RelativeLayout
+        android:id="@+id/flMiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+
+        <TableLayout           
+            android:id="@+id/tlMonday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                 android:layout_marginLeft="10dp"
+                android:id="@+id/trMondayOverView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:id="@+id/rlMonday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <ImageView
+                        android:id="@+id/ivMondayImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/night_rain_72" />
+
+                    <TextView
+                        android:id="@+id/tv_7Day_Monday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/ivMondayImage"
+                        android:text="Thursday"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:id="@+id/tvModayDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_7Day_Monday"
+                        android:layout_below="@+id/tv_7Day_Monday"
+                        android:text="Mostly Clear"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvDayTemparature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/tv_7Day_Monday"
+                        android:text="24\u2103"
+                        android:textSize="45sp" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trMondayDescriptiveData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/rlMondayDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <TableLayout
+                        android:id="@+id/tlLeftTableMonday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp" >
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvMondayMaxTemparature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Max Temp" />
+
+                            <TextView
+                                android:id="@+id/tvMondayMaxTemparatureValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="24\u2103" />
+                        </TableRow>
+
+                       
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                             <TextView
+                                android:id="@+id/tvMondayWindSpeed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Wind Speed" />
+
+                            <TextView
+                                android:id="@+id/tvMondayWindSpeedValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="2-8 kmph" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                             <TextView
+                                android:id="@+id/tvMondayHumidity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Humidity" />
+
+                            <TextView
+                                android:id="@+id/tvMondayHumidityValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="80%" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <TableLayout
+                        android:id="@+id/tlRightTableMonday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/tlLeftTableMonday" >
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow1_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvMondayMinTemparature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Min Temp" />
+
+                            <TextView
+                                android:id="@+id/tvMondayMinTemparatureValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="24\u2103" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow3_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvMondayWindDirection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Wind Direction" />
+
+                            <TextView
+                                android:id="@+id/tvMondayWindDirectionValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="250" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow4_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvPressure"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pressure" />
+
+                            <TextView
+                                android:id="@+id/tvPressureValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="1010.84" />
+                        </TableRow>
+                    </TableLayout>
+                </RelativeLayout>
+            </TableRow>
+            
+        </TableLayout>
+    </RelativeLayout>
+    
+
+</LinearLayout>

@@ -109,6 +109,8 @@ public class GoogleMapActivity extends MapActivity {
 					if (addresses.size() > 0) {
 						Log.v("Location | City", "City 2 : "
 								+ addresses.get(0).getLocality());
+						MarkerOptions marker = new MarkerOptions().position(
+								new LatLng(lattitude, longitude)).title(""+ addresses.get(0).getLocality());
 						Log.v("Location | Country", "Country 2 : "
 								+ addresses.get(0).getCountryName());
 					}

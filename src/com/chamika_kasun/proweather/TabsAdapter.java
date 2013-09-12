@@ -8,12 +8,10 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
 	public TabsAdapter(FragmentManager fm) {
 		super(fm);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Fragment getItem(int arg0) {
-		// TODO Auto-generated method stub
 		switch (arg0) {
 		case 0:
 			return new Home();
