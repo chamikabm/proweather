@@ -1,16 +1,19 @@
 package com.chamika_kasun.proweather;
 
 import java.io.IOException;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.chamika_kasun.proweather.base.BaseFragment;
 import com.chamika_kasun.proweather.objects.HourlyWeather;
 import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.utility.Constants;
-import com.chamika_kasun.proweather.utility.JSONParser;
 import com.chamika_kasun.proweather.utility.Utils;
-import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,11 +37,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This Class is Used to Retrive and Show data of the GPS Location Weather Data
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
+
 public class Home extends BaseFragment {
 
-	// C0nstant
+	// Constant for Map Activity Reuqest Code
 	private final static int MAP_ACTIVITY_REQUEST_CODE = 0;
 
+	//Varable to hold Location lattiude and longitude
 	private double lattitude;
 	private double longitude;
 
@@ -57,8 +68,9 @@ public class Home extends BaseFragment {
 			Bundle savedInstanceState) {
 
 		super.onCreateView(inflater, container, savedInstanceState);
-		final View convertView = inflater.inflate(R.layout.home, container,
-				false);
+		final View convertView = inflater.inflate(R.layout.home, container,false);
+		
+		setHasOptionsMenu(true);
 
 		// Set all the TextView with the XML
 
@@ -69,35 +81,24 @@ public class Home extends BaseFragment {
 		dayWord = (TextView) convertView.findViewById(R.id.tvDayWord);
 		day = (TextView) convertView.findViewById(R.id.tvDay);
 		temperature = (TextView) convertView.findViewById(R.id.tvTemparature);
-		temperatureMin = (TextView) convertView
-				.findViewById(R.id.tvTempMinValue);
-		temperatureMax = (TextView) convertView
-				.findViewById(R.id.tvTempMaxValue);
+		temperatureMin = (TextView) convertView.findViewById(R.id.tvTempMinValue);
+		temperatureMax = (TextView) convertView.findViewById(R.id.tvTempMaxValue);
 		humidity = (TextView) convertView.findViewById(R.id.tvHumidityValue);
 		sunrise = (TextView) convertView.findViewById(R.id.tvSunriseValue);
 		sunset = (TextView) convertView.findViewById(R.id.tvSunsetValue);
 		windSpeed = (TextView) convertView.findViewById(R.id.tvWindValue);
-		windDirection = (TextView) convertView
-				.findViewById(R.id.tvWindDirectionValue);
+		windDirection = (TextView) convertView.findViewById(R.id.tvWindDirectionValue);
 		pressure = (TextView) convertView.findViewById(R.id.tvPressureValue);
 
 		// Setting for Hourly Related TextViews.
-		tvTime12AMValue = (TextView) convertView
-				.findViewById(R.id.tvTime12AMValue);
-		tvTime3AMValue = (TextView) convertView
-				.findViewById(R.id.tvTime3AMValue);
-		tvTime6AMValue = (TextView) convertView
-				.findViewById(R.id.tvTime6AMValue);
-		tvTime9AMValue = (TextView) convertView
-				.findViewById(R.id.tvTime9AMValue);
-		tvTime12PMValue = (TextView) convertView
-				.findViewById(R.id.tvTime12PMValue);
-		tvTime3PMValue = (TextView) convertView
-				.findViewById(R.id.tvTime3PMValue);
-		tvTime6PMValue = (TextView) convertView
-				.findViewById(R.id.tvTime6PMValue);
-		tvTime9PMValue = (TextView) convertView
-				.findViewById(R.id.tvTime9PMValue);
+		tvTime12AMValue = (TextView) convertView.findViewById(R.id.tvTime12AMValue);
+		tvTime3AMValue = (TextView) convertView.findViewById(R.id.tvTime3AMValue);
+		tvTime6AMValue = (TextView) convertView.findViewById(R.id.tvTime6AMValue);
+		tvTime9AMValue = (TextView) convertView.findViewById(R.id.tvTime9AMValue);
+		tvTime12PMValue = (TextView) convertView.findViewById(R.id.tvTime12PMValue);
+		tvTime3PMValue = (TextView) convertView.findViewById(R.id.tvTime3PMValue);
+		tvTime6PMValue = (TextView) convertView.findViewById(R.id.tvTime6PMValue);
+		tvTime9PMValue = (TextView) convertView.findViewById(R.id.tvTime9PMValue);
 
 		// Create a Timer
 		final Handler h = new Handler();
@@ -120,10 +121,8 @@ public class Home extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 
-				final String[] choices = new String[] { "Using Google Map",
-						"Manual Input" };
-				AlertDialog.Builder alert = new AlertDialog.Builder(
-						getActivity());
+				final String[] choices = new String[] {"Using Google Map","Manual Input"};
+				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 				alert.setTitle("Get Location");
 				alert.setItems(choices, new DialogInterface.OnClickListener() {
 
@@ -134,10 +133,7 @@ public class Home extends BaseFragment {
 						switch (which) {
 						case 0:
 							// Using google maps
-							startActivityForResult(new Intent(
-									(Context) getActivity(),
-									GoogleMapActivity.class),
-									MAP_ACTIVITY_REQUEST_CODE);
+							startActivityForResult(new Intent((Context) getActivity(),GoogleMapActivity.class),MAP_ACTIVITY_REQUEST_CODE);
 
 							break;
 
@@ -155,17 +151,14 @@ public class Home extends BaseFragment {
 							d.getWindow().setAttributes(lp);
 							d.setCancelable(true);
 
-							final EditText etCountry = (EditText) d
-									.findViewById(R.id.etCountry);
-							final EditText etCity = (EditText) d
-									.findViewById(R.id.etCity);
-							Button done = (Button) d
-									.findViewById(R.id.bGetManulaInputData);
+							final EditText etCountry = (EditText) d.findViewById(R.id.etCountry);
+							final EditText etCity = (EditText) d.findViewById(R.id.etCity);
+							Button done = (Button) d.findViewById(R.id.bGetManulaInputData);
 							done.setOnClickListener(new OnClickListener() {
 
 								@Override
 								public void onClick(View v) {
-									// TODO Auto-generated method stub
+									
 									d.dismiss();
 
 									String city = etCity.getText().toString();
@@ -173,17 +166,10 @@ public class Home extends BaseFragment {
 									// use to remove white spaces
 									// Between Country Names. Sri Lanka -->
 									// SriLanka
-									String country = etCountry.getText()
-											.toString().replaceAll("\\s+", "");
+									String country = etCountry.getText().toString().replaceAll("\\s+", "");
 
-									executeBackgroundTask(
-											Constants.LOCATION_WEATHER_URL + ""
-													+ city + "," + country,
-											true);
-									executeBackgroundTask(
-											Constants.LOCATION_WEATHER_HOURLY_URL
-													+ "" + city + "," + country,
-											false);
+									executeBackgroundTask(Constants.LOCATION_WEATHER_URL + ""+ city + "," + country,true);
+									executeBackgroundTask(Constants.LOCATION_WEATHER_HOURLY_URL+ "" + city + "," + country,false);
 								}
 							});
 
@@ -231,17 +217,14 @@ public class Home extends BaseFragment {
 
 			e.printStackTrace();
 
-			Toast.makeText((Context) getActivity(),
-					"Data Connection is Not Available", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText((Context) getActivity(),"Data Connection is Not Available", Toast.LENGTH_SHORT).show();
 
 			return convertView;
 		}
 		if (addresses.size() > 0) {
 
 			Log.v("Location | City", "City: " + addresses.get(0).getLocality());
-			Log.v("Location | Country", "Country: "
-					+ addresses.get(0).getCountryName());
+			Log.v("Location | Country", "Country: "+addresses.get(0).getCountryName());
 		}
 
 		runBackgroudTasks(lattitude, longitude);
@@ -289,16 +272,15 @@ public class Home extends BaseFragment {
 
 		} else {
 
-			// Used to display an Error message if something went wrong while
-			// recieving the data
-			Toast.makeText((Context) getActivity(), "Error occured",
-					Toast.LENGTH_SHORT).show();
+			// Used to display an Error message if something went wrong while  recieving the data
+			Toast.makeText((Context) getActivity(), "Error occured",Toast.LENGTH_SHORT).show();
 		}
 
 	}
 
 	@Override
 	public void onSubTaskFinished(String result) {
+		
 		super.onSubTaskFinished(result);
 
 		if (result != null && result.length() > 0) {
@@ -306,57 +288,41 @@ public class Home extends BaseFragment {
 			HourlyWeather hwinfo = jsonParser.getLocationHorlyWeather(result);
 
 			// Assign valuse to TextViews.
-			tvTime12AMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime12AMValue()))
-					+ "\u2103");
+			tvTime12AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime12AMValue()))+ "\u2103");
 			// Log.v("12AM ", String.valueOf(hwinfo.getTvTime12AMValue()));
-			tvTime3AMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime3AMValue()))
-					+ "\u2103");
+			
+			tvTime3AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime3AMValue()))+ "\u2103");
 			// Log.v("3AM ", String.valueOf(hwinfo.getTvTime3AMValue()));
-			tvTime6AMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime6AMValue()))
-					+ "\u2103");
+			
+			tvTime6AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6AMValue()))+ "\u2103");
 			// Log.v("6AM ", String.valueOf(hwinfo.getTvTime6AMValue()));
-			tvTime9AMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime9AMValue()))
-					+ "\u2103");
+			
+			tvTime9AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9AMValue()))+ "\u2103");
 			// Log.v("9AM ", String.valueOf(hwinfo.getTvTime9AMValue()));
-			tvTime12PMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime12PMValue()))
-					+ "\u2103");
+			
+			tvTime12PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime12PMValue()))+ "\u2103");
 			// Log.v("12PM", String.valueOf(hwinfo.getTvTime12PMValue()));
-			tvTime3PMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime3PMValue()))
-					+ "\u2103");
+			
+			tvTime3PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime3PMValue()))+ "\u2103");
 			// Log.v("3PM ", String.valueOf(hwinfo.getTvTime3PMValue()));
-			tvTime6PMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime6PMValue()))
-					+ "\u2103");
-			// Log.v("6PM ",
-			// String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()));
-			tvTime9PMValue.setText(String
-					.valueOf(getCorrectTemparatureInCelcius(hwinfo
-							.getTvTime9PMValue()))
-					+ "\u2103");
-			// Log.v("9PM ",
-			// String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()));
+			
+			tvTime6PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()))+ "\u2103");
+			// Log.v("6PM ", String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()));
+			
+			tvTime9PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()))+ "\u2103");
+			// Log.v("9PM ",String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()));
+			
 		} else {
-			// Used to display an Error message if something went wrong while
-			// recieving the data
-			Toast.makeText((Context) getActivity(), "Error occured",
-					Toast.LENGTH_SHORT).show();
+			
+			// Used to display an Error message if something went wrong while recieving the data
+			Toast.makeText((Context) getActivity(), "Error occured",Toast.LENGTH_SHORT).show();
 		}
 	}
 
-	// Method Used to Set Date and the Time
+
+	/**
+	 * This method is used to Obtain the Current Date and the Time
+	 */
 	private void setTimeAndDate() {
 
 		// In built Java Function used to get the Current Date and the Time.
@@ -420,6 +386,12 @@ public class Home extends BaseFragment {
 		day.setText(smonth + "/" + sday + "/" + sYear);
 
 	}
+	
+	/**
+	 * This method is use to Convert the Kelvin Temparature to Rounded Celcius
+	 * @param temparature - This takes the Kelvin temapature in float
+	 * @return - Returns the rounded Celcius Temparature
+	 */
 
 	public int getCorrectTemparatureInCelcius(float temparature) {
 
@@ -437,6 +409,9 @@ public class Home extends BaseFragment {
 		return temparetureCelcius;
 	}
 
+	/**
+	 * This method is used to Convert the 24 Hour time to 12 Hour time
+	 */
 	public void setUpdateTime() {
 		// In built Java Function used to get the Current Date and the Time.
 		String txt = "";
@@ -474,12 +449,9 @@ public class Home extends BaseFragment {
 				String newLongitude = bundleLocation.getString("Longitude");
 
 				executeBackgroundTask(
-						Constants.LOCATION_WEATHER_URL_ON_COORDINATES + "lat="
-								+ newLattitude + "&lon=" + newLongitude, true);
+						Constants.LOCATION_WEATHER_URL_ON_COORDINATES + "lat="+ newLattitude + "&lon=" +newLongitude, true);
 				executeBackgroundTask(
-						Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES
-								+ "lat=" + newLattitude + "&lon="
-								+ newLongitude, false);
+						Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES+ "lat=" + newLattitude + "&lon="+newLongitude, false);
 
 			} else {
 				Toast.makeText((Context) getActivity(), "Error occured",
@@ -488,13 +460,29 @@ public class Home extends BaseFragment {
 		}
 	}
 
+	/**
+	 * This method is used  to run the JSONParser to get Location Data
+	 * @param lattitude2 - It takes the location lattitude in double 
+	 * @param longitude2 - Ti takes the location longitude in double
+	 */
 	public void runBackgroudTasks(double lattitude2, double longitude2) {
 
-		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
-				+ "lat=" + lattitude2 + "&lon=" + longitude2, true);
-		executeBackgroundTask(
-				Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="
-						+ lattitude2 + "&lon=" + longitude2, false);
+		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES+ "lat=" + lattitude2 + "&lon=" + longitude2, true);
+		executeBackgroundTask(Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="+ lattitude2 + "&lon=" + longitude2, false);
 
 	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_home, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
 }

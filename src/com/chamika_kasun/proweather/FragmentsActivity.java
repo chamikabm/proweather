@@ -11,6 +11,8 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class FragmentsActivity extends SherlockFragmentActivity implements OnPageChangeListener ,TabListener{
 
@@ -33,6 +35,7 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 		viewPager = (ViewPager) findViewById(R.id.vpTest);
 		actionBar = getSupportActionBar();
 		viewPager.setOnPageChangeListener(this);		
+		viewPager.setOffscreenPageLimit(4);
 		setupPager();
 		setUpTabs();
 	}
@@ -110,6 +113,19 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
+	}
+	
 
 
 }

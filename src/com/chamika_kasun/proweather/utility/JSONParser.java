@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.chamika_kasun.proweather.objects.City;
 import com.chamika_kasun.proweather.objects.DayWeather;
 import com.chamika_kasun.proweather.objects.HourlyWeather;
 import com.chamika_kasun.proweather.objects.Location;
@@ -214,21 +215,21 @@ public class JSONParser {
 				float windSpeed = Float.parseFloat(object.getString("speed"));
 				float deg = Float.parseFloat(object.getString("deg"));
 
-				Log.v("Band", "########################################");
-				Log.v("Day " + (i + 1), "Day : " + (i + 1));
-				Log.v("Date", "Date : " + day);
-				Log.v("Temparature", "Temparature : " + temparature);
-				Log.v("MaxTemparature", "MaxTemparature : " + maxTemparature);
-				Log.v("MinTemparature", "MinTemparature : " + minTemparature);
-				Log.v("Pressure", "Pressure : " + pressure);
-				Log.v("Humidity", "Humidity : " + humidity);
-
-				Log.v("ID", "ID : " + id);
-				Log.v("Main", "Main : " + main);
-				Log.v("Description", "Description : " + description);
-				Log.v("Icon", "Icon : " + icon);
-				Log.v("Wind Speed", "Wind Speed : " + windSpeed);
-				Log.v("Degree", "Degree : " + deg);
+//				Log.v("Band", "########################################");
+//				Log.v("Day " + (i + 1), "Day : " + (i + 1));
+//				Log.v("Date", "Date : " + day);
+//				Log.v("Temparature", "Temparature : " + temparature);
+//				Log.v("MaxTemparature", "MaxTemparature : " + maxTemparature);
+//				Log.v("MinTemparature", "MinTemparature : " + minTemparature);
+//				Log.v("Pressure", "Pressure : " + pressure);
+//				Log.v("Humidity", "Humidity : " + humidity);
+//
+//				Log.v("ID", "ID : " + id);
+//				Log.v("Main", "Main : " + main);
+//				Log.v("Description", "Description : " + description);
+//				Log.v("Icon", "Icon : " + icon);
+//				Log.v("Wind Speed", "Wind Speed : " + windSpeed);
+//				Log.v("Degree", "Degree : " + deg);
 
 				dayWeather = new DayWeather();
 
@@ -255,6 +256,98 @@ public class JSONParser {
 		}
 
 		return arrayList;
+	}
+	
+	
+	public City getCityWeather(String json4) {
+
+		Log.v("Result City ", "Result City : "+json4);
+		
+		City cityObj = null;
+		Location locationObj = null;
+		Wind windObj = null;
+
+		try {
+			// Create a main JSON object to get Current Location Weather
+			// information. and get relevant data.
+			JSONObject mainObj = new JSONObject(json4);
+
+			// Create Child Object to get location coordinates
+			JSONObject coord = mainObj.getJSONObject("coord");
+			float longitude = Float.parseFloat(coord.getString("lon"));
+			float latitude = Float.parseFloat(coord.getString("lat"));
+
+			// Create Child Object to get country , sunset and sunset. and get
+			// relevant data.
+			JSONObject sys = mainObj.getJSONObject("sys");
+			String country = sys.getString("country");
+			long sunrise = sys.optLong("sunrise");
+			long sunset = sys.optLong("sunset");
+
+			// Create Child Object to get weather descriptions and get relevant
+			// data.
+			JSONArray weather = mainObj.getJSONArray("weather");
+			JSONObject weatherItem = weather.getJSONObject(0);
+			String mainDescription = weatherItem.getString("main");
+			String description = weatherItem.getString("description");
+			String iconCode = weatherItem.getString("icon");
+
+			// Create Child Object to get weather conditions. and get relevant
+			// data.
+			JSONObject main = mainObj.getJSONObject("main");
+			float temperature = Float.parseFloat(main.getString("temp"));
+			float pressure = Float.parseFloat(main.getString("pressure"));
+			int humidity = main.getInt("humidity");
+			float minTemperature = Float.parseFloat(main.getString("temp_min"));
+			float maxTemperature = Float.parseFloat(main.getString("temp_max"));
+
+			// Create a Child Object to get wind informations and get relevant
+			// data.
+			JSONObject wind = mainObj.getJSONObject("wind");
+			float windSpeed = Float.parseFloat(wind.getString("speed"));
+			float deg = Float.parseFloat(wind.getString("deg"));
+
+			// get City Name
+			String city_name = mainObj.getString("name");
+			
+			Log.v("Band", "########################################");
+			Log.v("City", "City : " + city_name);
+			Log.v("Temparature", "Temparature : " + temperature);
+			Log.v("MaxTemparature", "MaxTemparature : " + maxTemperature);
+			Log.v("MinTemparature", "MinTemparature : " + minTemperature);
+			Log.v("Pressure", "Pressure : " + pressure);
+			Log.v("Humidity", "Humidity : " + humidity);
+
+			Log.v("Country", "Country : " + country);
+			Log.v("Main", "Main : " + main);
+			Log.v("Description", "Description : " + description);
+			Log.v("Icon", "Icon : " + iconCode);
+			Log.v("Wind Speed", "Wind Speed : " + windSpeed);
+			Log.v("Degree", "Degree : " + deg);
+
+			// Create a Location Object with Retrieved Data
+			locationObj = new Location(latitude, longitude, country, city_name);
+			windObj = new Wind(windSpeed, deg);
+			cityObj = new City();
+			
+			cityObj.setDescription(description);
+			cityObj.setHumidity(humidity);
+			cityObj.setIconCode(iconCode);
+			cityObj.setLocation(locationObj);
+			cityObj.setMainDescription(mainDescription);
+			cityObj.setPressure(pressure);
+			cityObj.setTemperature(temperature);
+			cityObj.setTemperatureMax(maxTemperature);
+			cityObj.setTemperatureMin(minTemperature);
+			cityObj.setWind(windObj);
+			
+			
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// Return the Current Weather Object.
+		return cityObj;
 	}
 
 

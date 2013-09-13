@@ -1,18 +1,17 @@
 package com.chamika_kasun.proweather.base;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.chamika_kasun.proweather.utility.AsyncDataLoader;
-import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.JSONParser;
 import com.chamika_kasun.proweather.utility.Utils;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class BaseFragment extends Fragment {
+public class BaseFragment extends SherlockFragment {
 
 	private AsyncDataLoader asyncDataLoader;
 	protected JSONParser jsonParser;
@@ -47,5 +46,6 @@ public class BaseFragment extends Fragment {
 	public void onSubTaskFinished(String result){
 		
 	}
+
 	
 }

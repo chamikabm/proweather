@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item 
+        android:id="@+id/action_add_to_favourits"
+        android:icon="@android:drawable/ic_menu_save"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:title="@string/menu_home_save"
+        />
+
+</menu>

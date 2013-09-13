@@ -4,5 +4,7 @@
     <string name="app_name">Pro Weather</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="menu_home_save">Add</string>
+    <string name="menu_main_settings">Settings</string>
 
 </resources>

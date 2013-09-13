@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+       <TableLayout           
+            android:id="@+id/tlMonday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/trMondayOverView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:id="@+id/rlMonday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <ImageView
+                        android:id="@+id/ivMondayImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/night_rain_72" />
+
+                    <TextView
+                        android:id="@+id/tvCityName"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/ivMondayImage"
+                        android:text="Maharagama"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/tvCityDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tvCityName"
+                        android:layout_below="@+id/tvCityName"
+                        android:text="Mostly Clear"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvCityTemparature"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/tvCityName"
+                        android:text="24\u2103"
+                        android:textSize="35sp" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trMondayDescriptiveData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:id="@+id/rlMondayDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <TableLayout
+                        android:id="@+id/tlLeftTableMonday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvCityMaxTemparature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Max Temp" />
+
+                            <TextView
+                                android:id="@+id/tvCityMaxTemparatureValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="24\u2103" />
+                        </TableRow>
+
+                       
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                             <TextView
+                                android:id="@+id/tvCityWindSpeed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Wind Speed" />
+
+                            <TextView
+                                android:id="@+id/tvCityWindSpeedValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="2-8 kmph" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trCityDescriptiveDataRow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                             <TextView
+                                android:id="@+id/tvCityHumidity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Humidity" />
+
+                            <TextView
+                                android:id="@+id/tvCityHumidityValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="80%" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <TableLayout
+                        android:id="@+id/tlRightTableMonday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/tlLeftTableMonday" >
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow1_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvCityMinTemparature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Min Temp" />
+
+                            <TextView
+                                android:id="@+id/tvCityMinTemparatureValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="24\u2103" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow3_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvCityWindDirection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Wind Direction" />
+
+                            <TextView
+                                android:id="@+id/tvCityWindDirectionValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="250" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trMondayDescriptiveDataRow4_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tvCityPressure"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pressure" />
+
+                            <TextView
+                                android:id="@+id/tvCityPressureValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="1010.84" />
+                        </TableRow>
+                    </TableLayout>
+                </RelativeLayout>
+            </TableRow>
+            
+        </TableLayout>
+
+            <!-- This is the End of one Favourite Item -->
+
+            <View
+                android:id="@+id/viewTime"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#2B497B" />
+         
+        </LinearLayout>
+    
+
+</LinearLayout>
