@@ -10,6 +10,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+ * This Class is Used to Display the Splash Screen
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
 public class SplashScreen extends Activity {
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
@@ -42,6 +48,9 @@ public class SplashScreen extends Activity {
 		
 	}
 
+	/**
+	 * This methos is used to Initialze the Animation and the Lineralayout and start the Animation
+	 */
 	private void startAnimations() {
 		Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
 		anim.reset();

@@ -82,7 +82,7 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 		}
 		return null;
 	}
-
+ 
 	@Override
 	protected void onPostExecute(String result) {
 		

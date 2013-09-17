@@ -4,17 +4,22 @@ import java.util.ArrayList;
 
 import com.chamika_kasun.proweather.base.BaseFragment;
 import com.chamika_kasun.proweather.objects.DayWeather;
-import com.chamika_kasun.proweather.objects.Wind;
 import com.chamika_kasun.proweather.utility.Constants;
-import com.chamika_kasun.proweather.utility.JSONParser;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
+/**
+ * This Class is Used to Retrive and Show data of the GPS Location Weather Data For Comming 7 Days (Weather Forecast)
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
 
 public class Day_7 extends BaseFragment {
 
@@ -62,6 +67,8 @@ public class Day_7 extends BaseFragment {
 	@Override
 	public void onTaskFinished(String result) {
 		super.onTaskFinished(result);
+		
+		Log.v("Result Day_7", "Result Day_7 : "+result);
 
 		if (result != null && result.length() > 0) {
 
@@ -69,15 +76,13 @@ public class Day_7 extends BaseFragment {
 
 			if (arrayList != null) {
 
-				SevenDayAdapter sevenDayAdapter = new SevenDayAdapter(
-						getActivity(), R.layout.sevendayrow, arrayList);
+				SevenDayAdapter sevenDayAdapter = new SevenDayAdapter(getActivity(), R.layout.sevendayrow, arrayList);
 				listview.setAdapter(sevenDayAdapter);
 
 			}
 
 		} else {
-			Toast.makeText((Context) getActivity(), "Error occured",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText((Context) getActivity(), "Error Loading 7_Day Data",Toast.LENGTH_SHORT).show();
 		}
 
 	}

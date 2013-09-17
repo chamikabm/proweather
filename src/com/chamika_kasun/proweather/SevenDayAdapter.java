@@ -12,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * This Class is Used to as an Adapter for Sevenday List
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
 public class SevenDayAdapter extends ArrayAdapter<DayWeather>{
 	
 	private Context context;
@@ -69,6 +75,12 @@ public class SevenDayAdapter extends ArrayAdapter<DayWeather>{
 		return view;
 	}
 	
+	
+	/**
+	 * This methos is used to round the temarature to an int.
+	 * @param temparature - Takes temparature value in float
+	 * @return - Rounded Temparature in int
+	 */
 	public int getCorrectTemparature(float temparature) {
 
 		int temparetureCelcius;
@@ -88,7 +100,11 @@ public class SevenDayAdapter extends ArrayAdapter<DayWeather>{
 	
 	
 	
-	
+	/**
+	 * This is a Inner Class Which use to Hold the TextViews
+	 * @author Chamika
+	 *         E-mail : kasun.chamika@gmail.com
+	 */
 	private static class DayHolder{		
 
 		TextView  dayName,dayDescription, dayTemperature,

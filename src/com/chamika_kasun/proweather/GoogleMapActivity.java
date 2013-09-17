@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
@@ -34,9 +32,15 @@ import com.google.android.maps.MapView;
 import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
 import com.littlefluffytoys.littlefluffylocationlibrary.LocationLibrary;
 
+/**
+ * This Class is Used to Drow the Google Map and Deal with Functions( i.e Add Markers, Get Touch Details)
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
 public class GoogleMapActivity extends MapActivity {
 
-	// Google Map
+	//Google Map
 	private GoogleMap googleMap;
 
 	// GPSTracker class
@@ -53,83 +57,87 @@ public class GoogleMapActivity extends MapActivity {
 	LatLng position;
 	Double lattitude = 21.0;
 	Double longitude = 7.0;
+	private String city;
+	private String country;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//Initalize the Google Map
 		setContentView(R.layout.activity_main);
 
-			
-		
-		LocationLibrary.initialiseLibrary(getBaseContext(),
-				"com.chamika_kasun.googlemaps");
+		//Initialize the Google Map Library
+		LocationLibrary.initialiseLibrary(getBaseContext(),"com.chamika_kasun.googlemaps");
 
 		try {
-			// Loading map
+			//Call to Loading map
 			initilizeMap();
 
-			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-					R.id.map)).getMap();
+			
+			googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 			googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
+			//Get the User Current Location Lattitude and the Longitude
 			LocationInfo latestInfo = new LocationInfo(getBaseContext());
 			lattitude = (double) latestInfo.lastLat;
 			longitude = (double) latestInfo.lastLong;
 
-			final Marker marker1 = googleMap.addMarker(new MarkerOptions()
-					.position(new LatLng(lattitude, longitude)));
+			//Add a Marker on User Current Location
+			final Marker marker1 = googleMap.addMarker(new MarkerOptions().position(new LatLng(lattitude, longitude)));
 			marker1.setDraggable(true);
 
+			/**
+			 * This method is Used to Get Map Location Details on Map Clicks
+			 */
 			googleMap.setOnMapClickListener(new OnMapClickListener() {
 
 				@Override
 				public void onMapClick(LatLng point) {
-					// TODO Auto-generated method stub
 
 					marker1.setPosition(point);
 					position = marker1.getPosition();
 					lattitude = position.latitude;
 					longitude = position.longitude;
-					Log.v("Location Change 1 ", "Location Change 1 :"
-							+ lattitude.toString() + "" + longitude.toString());
-					Toast.makeText(
-							(Context) GoogleMapActivity.this,
-							"Latitude :" + lattitude.toString()
-									+ "Longitude : " + longitude.toString(),
-							Toast.LENGTH_SHORT).show();
+					
+					//Used to Check The Clicked Location Details
+					Log.v("Location Change 1 ", "Location Change 1 :"+ lattitude.toString() + "" + longitude.toString());
+					
+					//Used to make a Toast to Indicate Locaiton Details on the MAp
+					Toast.makeText((Context) GoogleMapActivity.this,"Latitude :" + lattitude.toString()+ "Longitude : " + longitude.toString(),Toast.LENGTH_SHORT).show();
 
-					Geocoder gcd = new Geocoder(GoogleMapActivity.this, Locale
-							.getDefault());
+					Geocoder gcd = new Geocoder(GoogleMapActivity.this, Locale.getDefault());
 					List<Address> addresses = null;
 					try {
-						addresses = gcd
-								.getFromLocation(lattitude, longitude, 1);
+						addresses = gcd.getFromLocation(lattitude, longitude, 1);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					if (addresses.size() > 0) {
-						Log.v("Location | City", "City 2 : "
-								+ addresses.get(0).getLocality());
-						MarkerOptions marker = new MarkerOptions().position(
-								new LatLng(lattitude, longitude)).title(""+ addresses.get(0).getLocality());
-						Log.v("Location | Country", "Country 2 : "
-								+ addresses.get(0).getCountryName());
+						//To View the User Clicked Location City and the Country
+						city = addresses.get(0).getLocality();
+						Log.v("Location | City 2", "City 2 : "+ city );
+						MarkerOptions marker = new MarkerOptions().position(new LatLng(lattitude, longitude)).title(""+ addresses.get(0).getLocality());
+						country = addresses.get(0).getCountryName();
+						Log.v("Location | Country 2", "Country 2 : "+country );
 					}
 
 				}
 			});
 
 			
+			
 			getLocationWeather = (Button) findViewById(R.id.bGetLocationWeather);
 			getLocationWeather.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					Bundle bundleLocation = new Bundle();
 					bundleLocation.putString("Lattitude", lattitude.toString());
 					bundleLocation.putString("Longitude", longitude.toString());
+					bundleLocation.putString("City", city);
+					bundleLocation.putString("Country", country);
+					
 					
 					Intent intent = getIntent();
 					intent.putExtras(bundleLocation);

@@ -16,9 +16,6 @@ public class BaseFragment extends SherlockFragment {
 	private AsyncDataLoader asyncDataLoader;
 	protected JSONParser jsonParser;
 	
-	
-
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

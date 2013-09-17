@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import com.chamika_kasun.proweather.base.BaseFragment;
 import com.chamika_kasun.proweather.objects.City;
 import com.chamika_kasun.proweather.objects.Location;
-import com.chamika_kasun.proweather.objects.Weather;
-import com.chamika_kasun.proweather.objects.Wind;
 import com.chamika_kasun.proweather.utility.Constants;
-import com.chamika_kasun.proweather.utility.JSONParser;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,8 +16,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * This Class is Used to Retrive and Show data of the Favourites Locations Weather Data
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
 public class Favourites extends BaseFragment {
 
+	//Create Data Types to Hold ListView, Cities, Locations and the locationIndex
 	private ListView listView;
 	private ArrayList<City> cities;
 	private ArrayList<Location> locations;
@@ -31,34 +35,29 @@ public class Favourites extends BaseFragment {
 			Bundle savedInstanceState) {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
-		View contentView = inflater.inflate(R.layout.favourites, container,
-				false);
+		View contentView = inflater.inflate(R.layout.favourites, container,false);
 
+		//Initialize the listview,cities,locations and the licationIndex
 		listView = (ListView) contentView.findViewById(R.id.lvFavourite);
 		cities = new ArrayList<City>();
 		locations = new ArrayList<Location>();
 		locationIndex = 0;
 
-		Location matara = new Location((float) 75.6, (float) 6.8, "SriLanka",
-				"Matara");
-		Location galle = new Location((float) 75.6, (float) 6.8, "SriLanka",
-				"Galle");
-		Location panadura = new Location((float) 75.6, (float) 6.8, "SriLanka",
-				"Panadura");
-		Location moratuwa = new Location((float) 75.6, (float) 6.8, "SriLanka",
-				"Moratuwa");
-		Location colombo = new Location((float) 75.6, (float) 6.8, "SriLanka",
-				"Colombo");
+		Location matara = new Location((float)  80.5333, (float)5.9500 , "SriLanka","Matara");
+		Location jaffna = new Location((float) 80.0000, (float) 9.6667, "SriLanka","Jaffna");
+		Location panadura = new Location((float) 79.9042, (float) 6.7133, "SriLanka","Panadura");
+		Location moratuwa = new Location((float) 79.8767, (float) 6.7991, "SriLanka","Moratuwa");
+		Location colombo = new Location((float)79.8428 , (float) 6.9344, "SriLanka","Colombo");
 
 		locations.add(matara);
 		locations.add(colombo);
 		locations.add(moratuwa);
 		locations.add(panadura);
-		locations.add(galle);
+		locations.add(jaffna);
 
-		executeTasks(locations.get(locationIndex).getLatitude(),
-				locations.get(locationIndex).getLongitude());
+		executeTasks(locations.get(locationIndex).getLatitude(),locations.get(locationIndex).getLongitude());
 
+		//Testes Codes Check The Data Pass 
 		// City matara = new City();
 		// matara.setDescription("Lite Rain");
 		// matara.setHumidity(50);
@@ -139,43 +138,55 @@ public class Favourites extends BaseFragment {
 
 	@Override
 	public void onTaskFinished(String result) {
-		// TODO Auto-generated method stub
 		super.onTaskFinished(result);
 
+		Log.v("Result Favouriets", "Result Favouriets : "+result);
+		
+		//This will execute if the returned result is not null and has elements.
 		if (result != null && result.length() > 0) {
 			
+			//To check Weather the Data Retrived Properly
 			Log.v("Return Result", "Return Result : "+result);
 
+			//Get City Weather Data Through JSONParser
 			City weatherCity = jsonParser.getCityWeather(result);
 			cities.add(weatherCity);
 			updateAdapter();
 			locationIndex++;
 
 			if (locationIndex < locations.size()) {
-				executeTasks(locations.get(locationIndex).getLatitude(),
-						locations.get(locationIndex).getLongitude());
+				executeTasks(locations.get(locationIndex).getLatitude(),locations.get(locationIndex).getLongitude());
 			}
 
 		} else {
-			Toast.makeText((Context) getActivity(), "Error occured",
+			//User to make a  Toast if an Error Occcur
+			Toast.makeText((Context) getActivity(), "Error Loading Favouriets Data",
 					Toast.LENGTH_SHORT).show();
 		}
 
 	}
 
+	/**
+	 * This methos is Used to Initialise the Adaprt Class and To set the ListView to Adapter
+	 */
 	private void updateAdapter() {
 
-		FavouritsAdapter favourietsAdapter = new FavouritsAdapter(
-				getActivity(), R.layout.favouriterow, cities);
+		//Initialize the FavouriteAdapter
+		FavouritsAdapter favourietsAdapter = new FavouritsAdapter(getActivity(), R.layout.favouriterow, cities);
+		
+		//Set favouriteadapter to listView for display them
 		listView.setAdapter(favourietsAdapter);
 
 	}
 
+	/**
+	 * This methos is used to execute URL to retrieve Data from API through JSONParser
+	 * @param longitude - This takes longitude of the Location in float
+	 * @param lattitude - This takes the lattiude of the Location in flaot
+	 */
 	private void executeTasks(float longitude, float lattitude) {
-	
 		
-		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES
-				+ "lat=" + lattitude + "&lon=" +longitude , true);
+		executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES	+ "lat=" + lattitude + "&lon=" +longitude , true);
 	}
 
 }

@@ -13,6 +13,12 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+/**
+ * This Class is Used to Retrive  the GPS Location Information
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
 public class GPSTracker extends Service implements LocationListener {
 
 	private final Context mContext;
@@ -44,6 +50,10 @@ public class GPSTracker extends Service implements LocationListener {
 		getLocation();
 	}
 
+	/**
+	 * This methos is Used to get the Current Location based on the GPS
+	 * @return - Current location 
+	 */
 	public Location getLocation() {
 		try {
 			locationManager = (LocationManager) mContext

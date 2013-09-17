@@ -2,6 +2,8 @@ package com.chamika_kasun.proweather;
 
 import java.io.IOException;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -11,6 +13,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.chamika_kasun.proweather.base.BaseFragment;
 import com.chamika_kasun.proweather.objects.HourlyWeather;
+import com.chamika_kasun.proweather.objects.Location;
 import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.Utils;
@@ -45,13 +48,16 @@ import android.widget.Toast;
 
 
 public class Home extends BaseFragment {
+	
+	
+	//Crete a Database Variable to Store Favouriets Data
+	private ProWeatherDataBase database;
 
 	// Constant for Map Activity Reuqest Code
 	private final static int MAP_ACTIVITY_REQUEST_CODE = 0;
 
 	//Varable to hold Location lattiude and longitude
-	private double lattitude;
-	private double longitude;
+	private Location locationCurrent;
 
 	// Define all the TextViews that in the home XML
 	TextView updateTime, location, time, dayWord, day, temperature,
@@ -64,8 +70,7 @@ public class Home extends BaseFragment {
 	ImageView locationButton;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 		super.onCreateView(inflater, container, savedInstanceState);
 		final View convertView = inflater.inflate(R.layout.home, container,false);
@@ -99,6 +104,12 @@ public class Home extends BaseFragment {
 		tvTime3PMValue = (TextView) convertView.findViewById(R.id.tvTime3PMValue);
 		tvTime6PMValue = (TextView) convertView.findViewById(R.id.tvTime6PMValue);
 		tvTime9PMValue = (TextView) convertView.findViewById(R.id.tvTime9PMValue);
+		
+		//Create Database to Store Favouriets Data
+		database = new ProWeatherDataBase(getActivity());	
+		
+		//Initialize the location
+		locationCurrent = new Location();
 
 		// Create a Timer
 		final Handler h = new Handler();
@@ -188,12 +199,12 @@ public class Home extends BaseFragment {
 		// ################################################################################
 
 		// This Code is not Working now. But Worked Earlier
-		// LocationInfo latestInfo = new LocationInfo((Context) getActivity());
-		//
-		// lattitude = (double) latestInfo.lastLat;
-		// Log.v("Latitude", "Latitude : "+lattitude);
-		// longitude = (double) latestInfo.lastLong;
-		// Log.v("Longitude", "Longitude : "+longitude);
+//		 LocationInfo latestInfo = new LocationInfo((Context) getActivity());
+//		
+//		 lattitude = (double) latestInfo.lastLat;
+//		 Log.v("Latitude", "Latitude : "+lattitude);
+//		 longitude = (double) latestInfo.lastLong;
+//		 Log.v("Longitude", "Longitude : "+longitude);
 
 		// ((FragmentsActivity)getActivity()).setLattitude((double)
 		// latestInfo.lastLat);
@@ -205,14 +216,13 @@ public class Home extends BaseFragment {
 		GPSTracker gps = new GPSTracker((Context) getActivity());
 
 		// Get Location Latitude and Longitude
-		lattitude = gps.getLatitude();
-		longitude = gps.getLongitude();
+		locationCurrent.setLatitude((float)gps.getLatitude());
+		locationCurrent.setLongitude((float)gps.getLongitude());
 
-		Geocoder gcd = new Geocoder(getActivity().getBaseContext(),
-				Locale.getDefault());
+		Geocoder gcd = new Geocoder(getActivity().getBaseContext(),Locale.getDefault());
 		List<Address> addresses = null;
 		try {
-			addresses = gcd.getFromLocation(lattitude, longitude, 1);
+			addresses = gcd.getFromLocation(locationCurrent.getLatitude(), locationCurrent.getLongitude(), 1);
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -223,11 +233,14 @@ public class Home extends BaseFragment {
 		}
 		if (addresses.size() > 0) {
 
-			Log.v("Location | City", "City: " + addresses.get(0).getLocality());
-			Log.v("Location | Country", "Country: "+addresses.get(0).getCountryName());
+			locationCurrent.setCity(addresses.get(0).getLocality());
+			locationCurrent.setCountry( addresses.get(0).getCountryName());
+			Log.v("Location | City", "City: " + locationCurrent.getCity() );
+			Log.v("Location | Country", "Country: "+ locationCurrent.getCountry());
+			
 		}
 
-		runBackgroudTasks(lattitude, longitude);
+		runBackgroudTasks(locationCurrent.getLatitude(), locationCurrent.getLongitude());
 
 		return convertView;
 
@@ -263,8 +276,7 @@ public class Home extends BaseFragment {
 			humidity.setText(String.valueOf(weatherInfo.getHumidity()));
 			sunrise.setText(Utils.convertInToTime(weatherInfo.getSunrise()));
 			sunset.setText(Utils.convertInToTime(weatherInfo.getSunset()));
-			windSpeed.setText(String.valueOf(weatherInfo.getWindSpeed())
-					+ "kmph");
+			windSpeed.setText(String.valueOf(weatherInfo.getWindSpeed())+ "mph");
 			windDirection.setText(String.valueOf(weatherInfo.getDeg()));
 			location.setText(weatherInfo.getCity());
 			humidity.setText(String.valueOf(weatherInfo.getHumidity() + "%"));
@@ -316,6 +328,7 @@ public class Home extends BaseFragment {
 			
 			// Used to display an Error message if something went wrong while recieving the data
 			Toast.makeText((Context) getActivity(), "Error occured",Toast.LENGTH_SHORT).show();
+			
 		}
 	}
 
@@ -340,31 +353,31 @@ public class Home extends BaseFragment {
 		// Switch Case to Map the Relevant Date Name
 		switch (dayWeek) {
 
-		case 1:
+		case 2:
 			dayText = "Monday";
 			break;
 
-		case 2:
+		case 3:
 			dayText = "Tuesday";
 			break;
 
-		case 3:
+		case 4:
 			dayText = "Wednesday";
 			break;
 
-		case 4:
+		case 5:
 			dayText = "Thursday";
 			break;
 
-		case 5:
+		case 6:
 			dayText = "Friday";
 			break;
 
-		case 6:
+		case 7:
 			dayText = "Saturday";
 			break;
 
-		case 7:
+		case 1:
 			dayText = "Sunday";
 			break;
 
@@ -407,12 +420,14 @@ public class Home extends BaseFragment {
 		}
 
 		return temparetureCelcius;
+		
 	}
 
 	/**
 	 * This method is used to Convert the 24 Hour time to 12 Hour time
 	 */
 	public void setUpdateTime() {
+		
 		// In built Java Function used to get the Current Date and the Time.
 		String txt = "";
 
@@ -430,36 +445,43 @@ public class Home extends BaseFragment {
 			txt = "AM";
 		}
 
-		updateTime.setText("Updated Time : " + hour + " : " + sminute + ""
-				+ txt);
+		updateTime.setText("Updated Time : " + hour + " : " + sminute + ""+ txt);
 
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == MAP_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
+				
+
+				Location locationNew = new Location();
 
 				Bundle bundleLocation = new Bundle();
 				bundleLocation = data.getExtras();
 
-				String newLattitude = bundleLocation.getString("Lattitude");
-				String newLongitude = bundleLocation.getString("Longitude");
+				locationNew.setLatitude(Float.parseFloat(bundleLocation.getString("Lattitude")));
+				locationNew.setLongitude( Float.parseFloat( bundleLocation.getString("Longitude")));
+				locationNew.setCity( bundleLocation.getString("City"));
+				locationNew.setCountry(bundleLocation.getString("Country"));
+				
+				locationCurrent = locationNew;
 
-				executeBackgroundTask(
-						Constants.LOCATION_WEATHER_URL_ON_COORDINATES + "lat="+ newLattitude + "&lon=" +newLongitude, true);
-				executeBackgroundTask(
-						Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES+ "lat=" + newLattitude + "&lon="+newLongitude, false);
+				executeBackgroundTask(Constants.LOCATION_WEATHER_URL_ON_COORDINATES + "lat="+ locationNew.getLatitude() + "&lon=" +locationNew.getLongitude(), true);
+				executeBackgroundTask(Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES+ "lat=" + locationNew.getLatitude() + "&lon="+locationNew.getLongitude(), false);
 
 			} else {
 				Toast.makeText((Context) getActivity(), "Error occured",
 						Toast.LENGTH_SHORT).show();
 			}
 		}
+		
 	}
 
+	
 	/**
 	 * This method is used  to run the JSONParser to get Location Data
 	 * @param lattitude2 - It takes the location lattitude in double 
@@ -474,12 +496,51 @@ public class Home extends BaseFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		
 		inflater.inflate(R.menu.menu_home, menu);
 		super.onCreateOptionsMenu(menu, inflater);
+		
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {	
+		
+		if(item.getItemId() == R.id.action_add_to_favourits){
+			try {
+				database.open();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+			boolean isExisting = database.isExisting(locationCurrent.getCity(), locationCurrent.getCountry());
+
+			if(isExisting){
+				Toast.makeText((Context) getActivity(), "It is Already in the Database.",Toast.LENGTH_SHORT).show();
+			}else{
+				database.createEntrey(locationCurrent);
+				
+				ArrayList<Location> locaznz = new ArrayList<Location>();
+				
+				locaznz = database.getData();
+				
+				if(locaznz.size()>0){
+				
+					for(int i = 0; i<locaznz.size();i++){
+						
+						Log.v("Location"+i+" ID", "Location"+i+" ID : "+locaznz.get(i).getId());
+						Log.v("Location"+i+" City Name", "Location"+i+" City Name : "+locaznz.get(i).getCity());
+						Log.v("Location"+i+" Country Name", "Location"+i+" Country Name : "+locaznz.get(i).getCountry());
+						Log.v("Location"+i+" Longitude", "Location"+i+" Longitude : "+locaznz.get(i).getLongitude());
+						Log.v("Location"+i+" Lattitude", "Location"+i+" Lattitude : "+locaznz.get(i).getCountry());
+						
+					}
+				}
+				
+			}
+			
+			database.close();
+			
+		}
 		
 		return super.onOptionsItemSelected(item);
 	}

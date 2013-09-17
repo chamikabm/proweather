@@ -4,6 +4,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+/**
+ * This Class is Used as an Adapter for ViewPager
+ * @author Chamika
+ * 		   E-mail :  kasun.chamika@gmail.com
+ */
+
 public class TabsAdapter extends FragmentPagerAdapter {
 
 	public TabsAdapter(FragmentManager fm) {
@@ -23,7 +29,7 @@ public class TabsAdapter extends FragmentPagerAdapter {
 			return new Favourites();
 			
 		case 3:
-			return new Detailed();
+			return new Tsunami();
 			
 		}
 		return new Fragment();
@@ -31,7 +37,6 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return 4;
 	}
 
