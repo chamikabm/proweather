@@ -1,5 +1,6 @@
 package com.chamika_kasun.proweather;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.chamika_kasun.proweather.base.BaseFragment;
@@ -29,6 +30,7 @@ public class Favourites extends BaseFragment {
 	private ArrayList<City> cities;
 	private ArrayList<Location> locations;
 	private int locationIndex;
+	private ProWeatherDataBase dataBase;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,25 +39,42 @@ public class Favourites extends BaseFragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View contentView = inflater.inflate(R.layout.favourites, container,false);
 
-		//Initialize the listview,cities,locations and the licationIndex
+//		//Initialize the listview and City
 		listView = (ListView) contentView.findViewById(R.id.lvFavourite);
 		cities = new ArrayList<City>();
-		locations = new ArrayList<Location>();
+		
+//		locations = new ArrayList<Location>();
+		
+		
+		//Initialize the iterating variable and the Locations Array List and Database
 		locationIndex = 0;
+		locations = new ArrayList<Location>();
+		dataBase = new ProWeatherDataBase(getActivity());
+		
+		try {
+			dataBase.open();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		locations = dataBase.getData();
+		
+		dataBase.close();
+		
 
-		Location matara = new Location((float)  80.5333, (float)5.9500 , "SriLanka","Matara");
-		Location jaffna = new Location((float) 80.0000, (float) 9.6667, "SriLanka","Jaffna");
-		Location panadura = new Location((float) 79.9042, (float) 6.7133, "SriLanka","Panadura");
-		Location moratuwa = new Location((float) 79.8767, (float) 6.7991, "SriLanka","Moratuwa");
-		Location colombo = new Location((float)79.8428 , (float) 6.9344, "SriLanka","Colombo");
-
-		locations.add(matara);
-		locations.add(colombo);
-		locations.add(moratuwa);
-		locations.add(panadura);
-		locations.add(jaffna);
-
-		executeTasks(locations.get(locationIndex).getLatitude(),locations.get(locationIndex).getLongitude());
+//		Location matara = new Location((float)  80.5333, (float)5.9500 , "SriLanka","Matara");
+//		Location jaffna = new Location((float) 80.0000, (float) 9.6667, "SriLanka","Jaffna");
+//		Location panadura = new Location((float) 79.9042, (float) 6.7133, "SriLanka","Panadura");
+//		Location moratuwa = new Location((float) 79.8767, (float) 6.7991, "SriLanka","Moratuwa");
+//		Location colombo = new Location((float)79.8428 , (float) 6.9344, "SriLanka","Colombo");
+//
+//		locations.add(matara);
+//		locations.add(colombo);
+//		locations.add(moratuwa);
+//		locations.add(panadura);
+//		locations.add(jaffna);
+//
+		executeTasks(locations.get(locationIndex).getLongitude(),locations.get(locationIndex).getLatitude());
 
 		//Testes Codes Check The Data Pass 
 		// City matara = new City();
@@ -155,13 +174,12 @@ public class Favourites extends BaseFragment {
 			locationIndex++;
 
 			if (locationIndex < locations.size()) {
-				executeTasks(locations.get(locationIndex).getLatitude(),locations.get(locationIndex).getLongitude());
+				executeTasks(locations.get(locationIndex).getLongitude(),locations.get(locationIndex).getLatitude());
 			}
 
 		} else {
 			//User to make a  Toast if an Error Occcur
-			Toast.makeText((Context) getActivity(), "Error Loading Favouriets Data",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText((Context) getActivity(), "Error Loading Favouriets Data",Toast.LENGTH_SHORT).show();
 		}
 
 	}

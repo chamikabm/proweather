@@ -215,27 +215,30 @@ public class JSONParser {
 				float windSpeed = Float.parseFloat(object.getString("speed"));
 				float deg = Float.parseFloat(object.getString("deg"));
 
-//				Log.v("Band", "########################################");
-//				Log.v("Day " + (i + 1), "Day : " + (i + 1));
-//				Log.v("Date", "Date : " + day);
-//				Log.v("Temparature", "Temparature : " + temparature);
-//				Log.v("MaxTemparature", "MaxTemparature : " + maxTemparature);
-//				Log.v("MinTemparature", "MinTemparature : " + minTemparature);
-//				Log.v("Pressure", "Pressure : " + pressure);
-//				Log.v("Humidity", "Humidity : " + humidity);
-//
-//				Log.v("ID", "ID : " + id);
-//				Log.v("Main", "Main : " + main);
-//				Log.v("Description", "Description : " + description);
-//				Log.v("Icon", "Icon : " + icon);
-//				Log.v("Wind Speed", "Wind Speed : " + windSpeed);
-//				Log.v("Degree", "Degree : " + deg);
+				// Log.v("Band", "########################################");
+				// Log.v("Day " + (i + 1), "Day : " + (i + 1));
+				// Log.v("Date", "Date : " + day);
+				// Log.v("Temparature", "Temparature : " + temparature);
+				// Log.v("MaxTemparature", "MaxTemparature : " +
+				// maxTemparature);
+				// Log.v("MinTemparature", "MinTemparature : " +
+				// minTemparature);
+				// Log.v("Pressure", "Pressure : " + pressure);
+				// Log.v("Humidity", "Humidity : " + humidity);
+				//
+				// Log.v("ID", "ID : " + id);
+				// Log.v("Main", "Main : " + main);
+				// Log.v("Description", "Description : " + description);
+				// Log.v("Icon", "Icon : " + icon);
+				// Log.v("Wind Speed", "Wind Speed : " + windSpeed);
+				// Log.v("Degree", "Degree : " + deg);
 
 				dayWeather = new DayWeather();
 
-				String dayWeek = getDateStringCurrentTimeZone(Long.parseLong(day));
-				Log.v("Day of the Week", "Day of the Week : "+dayWeek);
-				
+				String dayWeek = getDateStringCurrentTimeZone(Long
+						.parseLong(day));
+				Log.v("Day of the Week", "Day of the Week : " + dayWeek);
+
 				dayWeather.setDay(dayWeek);
 				dayWeather.setTemperature(temparature);
 				dayWeather.setTemperatureMax(maxTemparature);
@@ -257,12 +260,11 @@ public class JSONParser {
 
 		return arrayList;
 	}
-	
-	
+
 	public City getCityWeather(String json4) {
 
-		Log.v("Result City ", "Result City : "+json4);
-		
+		Log.v("Result City ", "Result City : " + json4);
+
 		City cityObj = null;
 		Location locationObj = null;
 		Wind windObj = null;
@@ -299,7 +301,9 @@ public class JSONParser {
 			float pressure = Float.parseFloat(main.getString("pressure"));
 			int humidity = main.getInt("humidity");
 			float minTemperature = Float.parseFloat(main.getString("temp_min"));
+			minTemperature = getCorrectTemparatureInCelcius(minTemperature);
 			float maxTemperature = Float.parseFloat(main.getString("temp_max"));
+			maxTemperature =  getCorrectTemparatureInCelcius(maxTemperature);
 
 			// Create a Child Object to get wind informations and get relevant
 			// data.
@@ -309,7 +313,7 @@ public class JSONParser {
 
 			// get City Name
 			String city_name = mainObj.getString("name");
-			
+
 			Log.v("Band", "########################################");
 			Log.v("City", "City : " + city_name);
 			Log.v("Temparature", "Temparature : " + temperature);
@@ -329,7 +333,7 @@ public class JSONParser {
 			locationObj = new Location(latitude, longitude, country, city_name);
 			windObj = new Wind(windSpeed, deg);
 			cityObj = new City();
-			
+
 			cityObj.setDescription(description);
 			cityObj.setHumidity(humidity);
 			cityObj.setIconCode(iconCode);
@@ -340,8 +344,6 @@ public class JSONParser {
 			cityObj.setTemperatureMax(maxTemperature);
 			cityObj.setTemperatureMin(minTemperature);
 			cityObj.setWind(windObj);
-			
-			
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -350,18 +352,35 @@ public class JSONParser {
 		return cityObj;
 	}
 
+	public int getCorrectTemparatureInCelcius(float temparature) {
 
-@SuppressLint("NewApi")
-public static String getDateStringCurrentTimeZone(long timestamp) {
+		int temparetureCelcius;
+		long number = (long) temparature;
+		float fraction = temparature - number;
 
-    Calendar calendar = Calendar.getInstance();
-    TimeZone t = TimeZone.getDefault();
+		if (fraction >= 0.5) {
+			temparetureCelcius = (int) (Math.floor(temparature) - 272.15);
 
-    calendar.setTimeInMillis(timestamp * 1000);
-    calendar.add(Calendar.MILLISECOND, t.getOffset(calendar.getTimeInMillis()));
+		} else {
+			temparetureCelcius = (int) (Math.ceil(temparature) - 272.15);
+		}
 
+		return temparetureCelcius;
 
-    return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.US);
-}
+	}
+
+	@SuppressLint("NewApi")
+	public static String getDateStringCurrentTimeZone(long timestamp) {
+
+		Calendar calendar = Calendar.getInstance();
+		TimeZone t = TimeZone.getDefault();
+
+		calendar.setTimeInMillis(timestamp * 1000);
+		calendar.add(Calendar.MILLISECOND,
+				t.getOffset(calendar.getTimeInMillis()));
+
+		return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG,
+				Locale.US);
+	}
 
 }

@@ -10,6 +10,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 public class ProWeatherDataBase {
 
@@ -30,8 +32,9 @@ public class ProWeatherDataBase {
 	private static class DbHelper extends SQLiteOpenHelper {
 
 		public DbHelper(Context context) {
+			
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
-			// TODO Auto-generated constructor stub
+			
 		}
 
 		@Override
@@ -77,15 +80,16 @@ public class ProWeatherDataBase {
 		cv.put(KEY_LONGITUDE, locaitonLast.getLatitude());
 		cv.put(KEY_LATTITUDE, locaitonLast.getLongitude());
 
+		ourDatabase.insert(DATABASE_TABLE, null, cv);
 
 	}
 
 	public ArrayList<Location> getData() {
 
-		String[] columns = new String[] { KEY_ROWID, KEY_CITY, KEY_COUNTRY,
-				KEY_LONGITUDE, KEY_LATTITUDE };
-		Cursor c = ourDatabase.query(DATABASE_TABLE, columns, null, null, null,
-				null, null);
+		String[] columns = new String[] { KEY_ROWID, KEY_CITY, KEY_COUNTRY,KEY_LONGITUDE, KEY_LATTITUDE };
+		Cursor c = ourDatabase.query(DATABASE_TABLE, columns, null, null, null,null, null);
+		
+		Log.v("Data Base Table Size", "Data Base Table Size : "+c.getCount());
 
 		ArrayList<Location> locationArray = new ArrayList<Location>();
 
@@ -94,13 +98,10 @@ public class ProWeatherDataBase {
 			int id = Integer.parseInt(c.getString(c.getColumnIndex(KEY_ROWID)));
 			String city = c.getString(c.getColumnIndex(KEY_CITY));
 			String country = c.getString(c.getColumnIndex(KEY_COUNTRY));
-			float lattitude = Float.parseFloat(c.getString(c
-					.getColumnIndex(KEY_LONGITUDE)));
-			float longitude = Float.parseFloat(c.getString(c
-					.getColumnIndex(KEY_LATTITUDE)));
+			float lattitude = Float.parseFloat(c.getString(c.getColumnIndex(KEY_LONGITUDE)));
+			float longitude = Float.parseFloat(c.getString(c.getColumnIndex(KEY_LATTITUDE)));
 
-			Location location = new Location(lattitude, longitude, country,
-					city);
+			Location location = new Location(lattitude, longitude, country,city);
 			location.setId(id);
 
 			locationArray.add(location);
@@ -112,8 +113,7 @@ public class ProWeatherDataBase {
 		return locationArray;
 	}
 
-	public void updateEntry(long lRow, String mCity, String mCountry)
-			throws SQLException {
+	public void updateEntry(long lRow, String mCity, String mCountry)throws SQLException {
 
 		ContentValues cvUpdate = new ContentValues();
 		cvUpdate.put(KEY_CITY, mCity);
@@ -123,8 +123,7 @@ public class ProWeatherDataBase {
 
 	}
 
-	public void deleteEntry(long lRow1, String city, String country)
-			throws SQLException {
+	public void deleteEntry(long lRow1, String city, String country)throws SQLException {
 
 		ourDatabase.delete(DATABASE_TABLE, KEY_ROWID + "=" + lRow1 + " AND " + KEY_CITY + " = " + city+ " AND " + KEY_COUNTRY + " = " + country, null);
 
@@ -138,6 +137,7 @@ public class ProWeatherDataBase {
 		Cursor cursor = ourDatabase.query(DATABASE_TABLE, data_Columns, KEY_CITY + " = ? AND " + KEY_COUNTRY + " = ?",new String[]{cityAdded,countryAdded}, null, null, null);
 
 		if (cursor.moveToFirst()) {
+			Toast.makeText (ourContext, "Existing Location.",Toast.LENGTH_SHORT).show();
 			ret = true;
 		} else {
 			ret = false;

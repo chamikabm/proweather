@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import com.chamika_kasun.proweather.objects.Location;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
@@ -55,10 +56,7 @@ public class GoogleMapActivity extends MapActivity {
 	// Data
 	int radius;
 	LatLng position;
-	Double lattitude = 21.0;
-	Double longitude = 7.0;
-	private String city;
-	private String country;
+	Location locatioUpdated;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +64,9 @@ public class GoogleMapActivity extends MapActivity {
 		
 		//Initalize the Google Map
 		setContentView(R.layout.activity_main);
+		
+		//Initialize the Location Variable
+		locatioUpdated = new Location();
 
 		//Initialize the Google Map Library
 		LocationLibrary.initialiseLibrary(getBaseContext(),"com.chamika_kasun.googlemaps");
@@ -80,11 +81,11 @@ public class GoogleMapActivity extends MapActivity {
 
 			//Get the User Current Location Lattitude and the Longitude
 			LocationInfo latestInfo = new LocationInfo(getBaseContext());
-			lattitude = (double) latestInfo.lastLat;
-			longitude = (double) latestInfo.lastLong;
+			locatioUpdated.setLatitude(latestInfo.lastLat);
+			locatioUpdated.setLongitude(latestInfo.lastLong);
 
 			//Add a Marker on User Current Location
-			final Marker marker1 = googleMap.addMarker(new MarkerOptions().position(new LatLng(lattitude, longitude)));
+			final Marker marker1 = googleMap.addMarker(new MarkerOptions().position(new LatLng(locatioUpdated.getLatitude(), locatioUpdated.getLongitude())));
 			marker1.setDraggable(true);
 
 			/**
@@ -97,47 +98,46 @@ public class GoogleMapActivity extends MapActivity {
 
 					marker1.setPosition(point);
 					position = marker1.getPosition();
-					lattitude = position.latitude;
-					longitude = position.longitude;
+					locatioUpdated.setLatitude((float)position.latitude);
+					locatioUpdated.setLongitude((float) position.longitude);
 					
 					//Used to Check The Clicked Location Details
-					Log.v("Location Change 1 ", "Location Change 1 :"+ lattitude.toString() + "" + longitude.toString());
+					Log.v("Location Change 1 ", "Location Change 1 :"+ locatioUpdated.getLatitude() + "" + locatioUpdated.getLongitude());
 					
 					//Used to make a Toast to Indicate Locaiton Details on the MAp
-					Toast.makeText((Context) GoogleMapActivity.this,"Latitude :" + lattitude.toString()+ "Longitude : " + longitude.toString(),Toast.LENGTH_SHORT).show();
+					Toast.makeText((Context) GoogleMapActivity.this,"Latitude :" + locatioUpdated.getLatitude()+ "Longitude : " + locatioUpdated.getLongitude(),Toast.LENGTH_SHORT).show();
 
 					Geocoder gcd = new Geocoder(GoogleMapActivity.this, Locale.getDefault());
 					List<Address> addresses = null;
 					try {
-						addresses = gcd.getFromLocation(lattitude, longitude, 1);
+						addresses = gcd.getFromLocation(locatioUpdated.getLatitude(), locatioUpdated.getLongitude(), 1);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 					if (addresses.size() > 0) {
 						//To View the User Clicked Location City and the Country
-						city = addresses.get(0).getLocality();
-						Log.v("Location | City 2", "City 2 : "+ city );
-						MarkerOptions marker = new MarkerOptions().position(new LatLng(lattitude, longitude)).title(""+ addresses.get(0).getLocality());
-						country = addresses.get(0).getCountryName();
-						Log.v("Location | Country 2", "Country 2 : "+country );
+						locatioUpdated.setCity(addresses.get(0).getLocality());
+						Log.v("Location | City 2", "City 2 : "+ locatioUpdated.getCity() );
+						MarkerOptions marker = new MarkerOptions().position(new LatLng(locatioUpdated.getLatitude(), locatioUpdated.getLongitude())).title(""+ addresses.get(0).getLocality());
+						locatioUpdated.setCountry(addresses.get(0).getCountryName());
+						Log.v("Location | Country 2", "Country 2 : "+locatioUpdated.getCity() );
 					}
 
 				}
-			});
-
-			
+			});	
 			
 			getLocationWeather = (Button) findViewById(R.id.bGetLocationWeather);
 			getLocationWeather.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Bundle bundleLocation = new Bundle();
-					bundleLocation.putString("Lattitude", lattitude.toString());
-					bundleLocation.putString("Longitude", longitude.toString());
-					bundleLocation.putString("City", city);
-					bundleLocation.putString("Country", country);
 					
+					Bundle bundleLocation = new Bundle();
+					
+					bundleLocation.putString("Lattitude", String.valueOf(locatioUpdated.getLatitude()));
+					bundleLocation.putString("Longitude", String.valueOf(locatioUpdated.getLongitude()));
+					bundleLocation.putString("City", locatioUpdated.getCity());
+					bundleLocation.putString("Country", locatioUpdated.getCountry());					
 					
 					Intent intent = getIntent();
 					intent.putExtras(bundleLocation);
@@ -158,39 +158,37 @@ public class GoogleMapActivity extends MapActivity {
 
 			// Get City Name of Location
 			Geocoder gcd = new Geocoder(this, Locale.getDefault());
-			List<Address> addresses = gcd.getFromLocation(lat, longt,
-					1);
+			List<Address> addresses = gcd.getFromLocation(lat, longt,1);
+			
 			if (addresses.size() > 0) {
+				
 				System.out.println("City : " + addresses.get(0).getLocality());
-				System.out.println("Country : "
-						+ addresses.get(0).getCountryName());
-				Log.v("Location | City", "City : "
-						+ addresses.get(0).getLocality());
-				Log.v("Location | Country", "Country : "
-						+ addresses.get(0).getCountryName());
+				System.out.println("Country : "+ addresses.get(0).getCountryName());
+				
+				Log.v("Location | City", "City : "+ addresses.get(0).getLocality());
+				Log.v("Location | Country", "Country : "+ addresses.get(0).getCountryName());
+				
 			}
 
 			// create marker
-			MarkerOptions marker = new MarkerOptions().position(
-					new LatLng(lat, longt)).title("Your are Here!");
+			MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, longt)).title("Your are Here!");
 
 			// Changing marker icon
-			marker.icon(BitmapDescriptorFactory
-					.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+			marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
 			// adding marker
 			googleMap.addMarker(marker);
 
 			// Add a Camera Position
-			CameraPosition cameraPosition = new CameraPosition.Builder()
-					.target(new LatLng(lat, longt)).zoom(12).build();
+			CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(lat, longt)).zoom(12).build();
 
 			// Move camera with an Animation
-			googleMap.animateCamera(CameraUpdateFactory
-					.newCameraPosition(cameraPosition));
+			googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 		} catch (Exception e) {
+			
 			e.printStackTrace();
+			
 		}
 
 	}
@@ -199,29 +197,35 @@ public class GoogleMapActivity extends MapActivity {
 	 * function to load map. If map is not created it will create it for you
 	 * */
 	private void initilizeMap() {
+		
 		if (googleMap == null) {
-			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-					R.id.map)).getMap();
+			
+			googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
 			// check if map is created successfully or not
 			if (googleMap == null) {
-				Toast.makeText(getApplicationContext(),
-						"Sorry! unable to create maps", Toast.LENGTH_SHORT)
-						.show();
+				
+				Toast.makeText(getApplicationContext(),"Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
 			}
+			
 		}
+		
 	}
 
 	@Override
 	protected void onResume() {
+		
 		super.onResume();
+		
 		initilizeMap();
+		
 	}
 
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
+
 		return false;
+		
 	}
 	
 

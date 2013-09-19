@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -240,7 +242,20 @@ public class Home extends BaseFragment {
 			
 		}
 
-		runBackgroudTasks(locationCurrent.getLatitude(), locationCurrent.getLongitude());
+		TimerTask t = new TimerTask() {
+			
+			@Override
+			public void run() {
+				Log.v("Timer Execute", "Timer Executed");
+				runBackgroudTasks(locationCurrent.getLatitude(), locationCurrent.getLongitude());
+				
+			}
+		};
+		
+		Timer tt = new Timer();
+		tt.scheduleAtFixedRate(t, 0, 60000);
+		
+		
 
 		return convertView;
 
@@ -353,6 +368,10 @@ public class Home extends BaseFragment {
 		// Switch Case to Map the Relevant Date Name
 		switch (dayWeek) {
 
+		case 1:
+			dayText = "Sunday";
+			break;
+			
 		case 2:
 			dayText = "Monday";
 			break;
@@ -375,11 +394,7 @@ public class Home extends BaseFragment {
 
 		case 7:
 			dayText = "Saturday";
-			break;
-
-		case 1:
-			dayText = "Sunday";
-			break;
+			break;		
 
 		}
 
@@ -506,6 +521,7 @@ public class Home extends BaseFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {	
 		
 		if(item.getItemId() == R.id.action_add_to_favourits){
+			
 			try {
 				database.open();
 			} catch (SQLException e1) {
@@ -517,7 +533,10 @@ public class Home extends BaseFragment {
 			if(isExisting){
 				Toast.makeText((Context) getActivity(), "It is Already in the Database.",Toast.LENGTH_SHORT).show();
 			}else{
+				
 				database.createEntrey(locationCurrent);
+				
+				Toast.makeText((Context) getActivity(), "Data Base Create Call Executed.",Toast.LENGTH_SHORT).show();
 				
 				ArrayList<Location> locaznz = new ArrayList<Location>();
 				
@@ -527,11 +546,13 @@ public class Home extends BaseFragment {
 				
 					for(int i = 0; i<locaznz.size();i++){
 						
-						Log.v("Location"+i+" ID", "Location"+i+" ID : "+locaznz.get(i).getId());
-						Log.v("Location"+i+" City Name", "Location"+i+" City Name : "+locaznz.get(i).getCity());
-						Log.v("Location"+i+" Country Name", "Location"+i+" Country Name : "+locaznz.get(i).getCountry());
-						Log.v("Location"+i+" Longitude", "Location"+i+" Longitude : "+locaznz.get(i).getLongitude());
-						Log.v("Location"+i+" Lattitude", "Location"+i+" Lattitude : "+locaznz.get(i).getCountry());
+						Toast.makeText((Context) getActivity(), "For Loop"+i,Toast.LENGTH_SHORT).show();
+						
+						Log.v("Location"+(i+1)+" ID", "Location"+i+" ID : "+locaznz.get(i).getId());
+						Log.v("Location"+(i+1)+" City Name", "Location"+i+" City Name : "+locaznz.get(i).getCity());
+						Log.v("Location"+(i+1)+" Country Name", "Location"+i+" Country Name : "+locaznz.get(i).getCountry());
+						Log.v("Location"+(i+1)+" Longitude", "Location"+i+" Longitude : "+locaznz.get(i).getLongitude());
+						Log.v("Location"+(i+1)+" Lattitude", "Location"+i+" Lattitude : "+locaznz.get(i).getLatitude());
 						
 					}
 				}
