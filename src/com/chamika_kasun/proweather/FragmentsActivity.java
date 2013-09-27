@@ -1,5 +1,6 @@
 package com.chamika_kasun.proweather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -128,14 +129,34 @@ public class FragmentsActivity extends SherlockFragmentActivity implements OnPag
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//Add a Stting Icon on the Action Bar
+		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//To get Selected Item From the Menu
-		return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		
+		case R.id.about_proweather:
+			Intent intent = new Intent("com.chamika_kasun.proweather.ABOUT");
+			startActivity(intent);			
+			break;
+
+		case R.id.action_settings:
+			Intent intent2 = new Intent("com.chamika_kasun.proweather.PREFS"); 
+			startActivity(intent2);
+			break;
+			
+		case R.id.proweather_guide:
+			Intent intent3 = new Intent("com.chamika_kasun.proweather.PROWEATHERGUIDE"); 
+			startActivity(intent3);
+			break;
+			
+		}
+		
+		return false;
 	}
 	
 

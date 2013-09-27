@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Welcome To ProWeather Applicaiton Guide"
+        android:textSize="15sp" />
+
+    <ScrollView
+        android:scrollbars="none"
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:src="@drawable/aa" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="View Location Weather"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="When you open the proweather application you will the latest update about the current location weather information." />
+            
+            
+            
+            
+            
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="View Specific Location Weather"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To get the latest wather information about the any location that you want. this app provides two mathods. One is using Goole Map and the other one is Manual Input. You can get this facilities by just clicking on the  locaiton icon on the Home page. Once you click on that icon you will get a popup box with those functionalities. " />
+            
+            
+            
+            
+            
+            
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Add to Favouriets"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Another cool function that Proweather app provieds you is that, You can add favouriets location`s to get weather information about that location. This function can be achive by in a second. What you have to do is just go to Home and the select what ever the location that you want to add as Favouriets. Then after you can see a save icon on top of the Action Bar, then just click on the button and now you are done. When you run  Proweather applicaiton again you will see that location will appear on the Favouriets." />
+            
+            
+            
+            
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Get Notifications"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You don`t want to always check your app to get location weather information. In this Proweather app you can simply get imfomation without opening app. What you have do is just tick on the get notification chekbox and then after set a time to receive notificaiton. After that you will receive current location weather information on your mobile notification bar as a notification." />
+            
+            
+            
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Get Sinhala Notifications"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="By default app is configured to send current location information using Englisj language. But if you are not soo good with Englisg language you can now get Sinhala weather notifications simply just changing one setting. For that go to Settings then click on the Select Notificaiton Language and change it to Sinhala. Then after you will get notifications on Sinhala Language." />
+            
+            
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    
+    <CheckBoxPreference
+        android:title="Enable Notifications"
+        android:defaultValue="true"
+        android:key="notifications"
+        android:summary="Check to enable Notifications"   
+        />
+    
+    <ListPreference 
+        android:title="Select Notification Language"
+        android:key="list"
+        android:summary="Choose a Language to Recieve Notifications"
+        android:entries="@array/list"
+        android:entryValues="@array/lvalues"
+        />
+        
+</PreferenceScreen>

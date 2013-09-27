@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    
+    <string-array  name="list">
+        
+        <item>English</item>
+        <item>Sinhala</item>
+        
+    </string-array>
+    
+    
+    <string-array  name="lvalues">
+        
+        <item>1</item>
+        <item>2</item>
+        
+        
+    </string-array>
+    
+    <string-array name="empty_array"/>
+    
+</resources>

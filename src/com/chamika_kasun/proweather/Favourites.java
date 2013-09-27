@@ -74,8 +74,9 @@ public class Favourites extends BaseFragment {
 //		locations.add(panadura);
 //		locations.add(jaffna);
 //
+		if(locations.size()>0){
 		executeTasks(locations.get(locationIndex).getLongitude(),locations.get(locationIndex).getLatitude());
-
+		}
 		//Testes Codes Check The Data Pass 
 		// City matara = new City();
 		// matara.setDescription("Lite Rain");
