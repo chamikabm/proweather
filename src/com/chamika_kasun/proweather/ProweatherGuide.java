@@ -3,6 +3,11 @@ package com.chamika_kasun.proweather;
 import android.app.Activity;
 import android.os.Bundle;
 
+/**
+ * This class is used to Show the Proweather Guieds.
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class ProweatherGuide  extends Activity {
 
 	@Override

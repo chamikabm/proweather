@@ -128,13 +128,9 @@ public class AsyncDataLoader extends AsyncTask<String, Integer, String> {
 		if (baseFragment != null) {
 			
 			if (isMainTask) {
-				
 				baseFragment.onTaskFinished(result);
-				
 			} else {
-				
 				baseFragment.onSubTaskFinished(result);
-				
 			}
 		}
 	}

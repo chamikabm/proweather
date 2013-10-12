@@ -20,7 +20,7 @@ import android.widget.Toast;
 /**
  * This Class is Used to Retrive and Show data of the Favourites Locations Weather Data
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class Favourites extends BaseFragment {

@@ -1,5 +1,10 @@
 package com.chamika_kasun.proweather.objects;
 
+/**
+ * This class is used to a Location Information
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class Location {
 
 	private float latitude;

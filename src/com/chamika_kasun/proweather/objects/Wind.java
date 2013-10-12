@@ -1,5 +1,10 @@
 package com.chamika_kasun.proweather.objects;
 
+/**
+ * This class is used to hold the Location Wind Information
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class Wind {
 
 	private float windSpeed;

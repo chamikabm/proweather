@@ -1,5 +1,10 @@
 package com.chamika_kasun.proweather.objects;
 
+/**
+ * This class is used to hold a city weather
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class City {
 	
 

@@ -108,7 +108,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity> 
-
+        
+        <receiver android:name="com.chamika_kasun.proweather.AlarmReceiver"/>
+        
+        <activity android:name="com.chamika_kasun.proweather.View"></activity>
+        
+        <activity
+            android:name="com.chamika_kasun.proweather.NotificationDialog"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         <!-- Goolge API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

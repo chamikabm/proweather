@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 /**
  * This Class is Used to Display the Splash Screen
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class SplashScreen extends Activity {

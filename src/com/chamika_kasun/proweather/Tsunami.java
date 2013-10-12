@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * This Class is Used to Retrive and Show data of the Tsunami Information
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class Tsunami extends Fragment {

@@ -13,6 +13,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * This class is used to create Database for the Application. Used to store Favouriets Locations Data.
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class ProWeatherDataBase {
 
 	public static final String KEY_ROWID = "_id";
@@ -61,6 +66,11 @@ public class ProWeatherDataBase {
 		ourContext = c;
 	}
 
+	/**
+	 * This method is used to create a database
+	 * @return
+	 * @throws SQLException
+	 */
 	public ProWeatherDataBase open() throws SQLException {
 		ourHelper = new DbHelper(ourContext);
 		ourDatabase = ourHelper.getWritableDatabase();
@@ -68,10 +78,17 @@ public class ProWeatherDataBase {
 
 	}
 
+	/**
+	 * This method is used to close the database conection
+	 */
 	public void close() {
 		ourHelper.close();
 	}
 
+	/**
+	 * This methos is used to create an Entry for a Location
+	 * @param locaitonLast - It takes an Location Object
+	 */
 	public void createEntrey(Location locaitonLast) {
 
 		ContentValues cv = new ContentValues();
@@ -84,6 +101,10 @@ public class ProWeatherDataBase {
 
 	}
 
+	/**
+	 * This method is used to returen the saved data in the Database
+	 * @return - IT returns the saved data in ArrayList<Location>  format
+	 */
 	public ArrayList<Location> getData() {
 
 		String[] columns = new String[] { KEY_ROWID, KEY_CITY, KEY_COUNTRY,KEY_LONGITUDE, KEY_LATTITUDE };
@@ -113,6 +134,14 @@ public class ProWeatherDataBase {
 		return locationArray;
 	}
 
+	
+	/**
+	 * This methos is used to Update an entry
+	 * @param lRow - It takes the Row number in long format
+	 * @param mCity - It takes the City name in String format
+	 * @param mCountry - It takes the Country name in String format 
+	 * @throws SQLException - It throws an SQLException if an Error occureed while accessing the database
+	 */
 	public void updateEntry(long lRow, String mCity, String mCountry)throws SQLException {
 
 		ContentValues cvUpdate = new ContentValues();
@@ -123,12 +152,26 @@ public class ProWeatherDataBase {
 
 	}
 
+	/**
+	 * This method is used to delete a pertocular entry from the databases
+	 * @param lRow1 - It takes the Row number in long format
+	 * @param city - It takes the City name in String format
+	 * @param country - It takes the Country name in String format 
+	 * @throws SQLException - It throws an SQLException if an Error occureed while accessing the database
+	 */
 	public void deleteEntry(long lRow1, String city, String country)throws SQLException {
 
 		ourDatabase.delete(DATABASE_TABLE, KEY_ROWID + "=" + lRow1 + " AND " + KEY_CITY + " = " + city+ " AND " + KEY_COUNTRY + " = " + country, null);
 
 	}
 
+	
+	/**
+	 * This method is used to check the existing items in the database
+	 * @param cityAdded - It takes the City Added in String format
+	 * @param countryAdded - It takes the Country in the String format
+	 * @return
+	 */
 	public boolean isExisting(String cityAdded, String countryAdded) {
 		
 		boolean ret;

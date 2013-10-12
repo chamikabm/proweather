@@ -1,5 +1,10 @@
 package com.chamika_kasun.proweather.objects;
 
+/**
+ * This class is used to Hold a any location weather information
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class Weather {
 
 	private long sunrise;
@@ -19,12 +24,15 @@ public class Weather {
 	private float longitude;
 	private String country;
 	private String city;
+	private String id;
+
 
 	public Weather(long sunrise, long sunset, String mainDescription,
 			String description, float temperature, float pressure,
-			int humidity, float temperatureMin, float temperatureMax,
+			int humidity, float temperatureMin, float temperatureMax, String id,
 			Location location, Wind wind) {
 
+		this.id =id;
 		this.sunset = sunset;
 		this.sunrise = sunrise;
 		this.mainDescription = mainDescription;
@@ -43,6 +51,10 @@ public class Weather {
 		this.city = location.getCity();
 		this.humidity = humidity;
 
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public float getWindSpeed() {

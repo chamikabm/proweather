@@ -15,7 +15,7 @@ import android.widget.TextView;
 /**
  * This Class is Used to as an Adapter for Sevenday List
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class SevenDayAdapter extends ArrayAdapter<DayWeather>{

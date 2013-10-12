@@ -332,6 +332,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv12AM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -377,6 +378,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv3AM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -422,6 +424,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv6AM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -467,6 +470,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv9AM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -512,6 +516,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv12PM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -557,6 +562,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv3PM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -602,6 +608,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv6PM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -647,6 +654,7 @@
                     <TableRow>
 
                         <ImageView
+                            android:id="@+id/iv9PM"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

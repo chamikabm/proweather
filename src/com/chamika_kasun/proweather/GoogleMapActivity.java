@@ -36,7 +36,7 @@ import com.littlefluffytoys.littlefluffylocationlibrary.LocationLibrary;
 /**
  * This Class is Used to Drow the Google Map and Deal with Functions( i.e Add Markers, Get Touch Details)
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class GoogleMapActivity extends MapActivity {

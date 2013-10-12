@@ -1,5 +1,10 @@
 package com.chamika_kasun.proweather.objects;
 
+/**
+ * This class is used to hold the Hourlr Weather information for a particular location
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class HourlyWeather {
 
 	private float tvTime12AMValue;

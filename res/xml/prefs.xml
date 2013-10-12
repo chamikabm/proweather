@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    
+
     <CheckBoxPreference
-        android:title="Enable Notifications"
         android:defaultValue="true"
         android:key="notifications"
-        android:summary="Check to enable Notifications"   
-        />
-    
-    <ListPreference 
-        android:title="Select Notification Language"
-        android:key="list"
-        android:summary="Choose a Language to Recieve Notifications"
+        android:summary="Check to enable Notifications"
+        android:title="Enable Notifications" />
+
+    <ListPreference
+        android:defaultValue="1"
         android:entries="@array/list"
         android:entryValues="@array/lvalues"
-        />
-        
+        android:key="language"
+        android:summary="Choose a Language to Recieve Notifications"
+        android:title="Select Notification Language" />
+    
+    <ListPreference
+        android:defaultValue="2"
+        android:entries="@array/period"
+        android:entryValues="@array/period_values"
+        android:key="period"
+        android:summary="Choose a Time Period to get Notifications"
+        android:title="Select Notification Time Period" />
+
 </PreferenceScreen>

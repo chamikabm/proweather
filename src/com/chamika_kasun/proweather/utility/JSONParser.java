@@ -19,9 +19,19 @@ import com.chamika_kasun.proweather.objects.Location;
 import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.objects.Wind;
 
+/**
+ * This class is used to retrieve data from the Weather API
+ * @author Chamika
+ *
+ */
 public class JSONParser {
 
-	// Method for get Location Weather Updates
+
+	/**
+	 * This methos is used to get the Current location weather informations
+	 * @param json - It takes the url to retrieve data
+	 * @return - Retuns a weather object with Current Location Weather Data
+	 */
 	public Weather getLocationWeather(String json) {
 
 		Weather weatherObj = null;
@@ -51,6 +61,7 @@ public class JSONParser {
 			JSONObject weatherItem = weather.getJSONObject(0);
 			String mainDescription = weatherItem.getString("main");
 			String description = weatherItem.getString("description");
+			String id  = weatherItem.getString("id");
 
 			// Create Child Object to get weather conditions. and get relevant
 			// data.
@@ -75,7 +86,7 @@ public class JSONParser {
 			windObj = new Wind(windSpeed, deg);
 			weatherObj = new Weather(sunrise, sunset, mainDescription,
 					description, temperature, pressure, humidity,
-					minTemperature, maxTemperature, locationObj, windObj);
+					minTemperature, maxTemperature,id, locationObj, windObj);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -84,7 +95,11 @@ public class JSONParser {
 		return weatherObj;
 	}
 
-	// Method for get Current Location Hourly Weather Information
+	/**
+	 * This methos is used to get the Current location Hourly weather information
+	 * @param json2 - It takes the url in String format
+	 * @return - It reurns the Horly weather Information Object
+	 */
 	public HourlyWeather getLocationHorlyWeather(String json2) {
 
 		HourlyWeather hwObj = null;
@@ -100,68 +115,60 @@ public class JSONParser {
 			// Create JSONObjects to Extract Infomation From the JSONArray.
 			JSONObject obj12AM = list.getJSONObject(0);
 			JSONObject main12AM = obj12AM.getJSONObject("main");
-			float obj12AMTemarature = Float.parseFloat(main12AM
-					.getString("temp"));
+			float obj12AMTemarature = Float.parseFloat(main12AM.getString("temp"));
 
 			JSONArray wetherIcon12AMArray = obj12AM.getJSONArray("weather");
 			JSONObject wetherIcon12AM = wetherIcon12AMArray.getJSONObject(0);
-			String obj12AMICON = wetherIcon12AM.getString("icon");
+			String obj12AMICON = wetherIcon12AM.getString("id");
 
 			JSONObject obj3AM = list.getJSONObject(1);
 			JSONObject main3AM = obj3AM.getJSONObject("main");
-			float obj3AMTemarature = Float
-					.parseFloat(main3AM.getString("temp"));
+			float obj3AMTemarature = Float.parseFloat(main3AM.getString("temp"));
 			JSONArray wetherIcon3AMArray = obj3AM.getJSONArray("weather");
 			JSONObject wetherIcon3AM = wetherIcon3AMArray.getJSONObject(0);
-			String obj3AMICON = wetherIcon3AM.getString("icon");
+			String obj3AMICON = wetherIcon3AM.getString("id");
 
 			JSONObject obj6AM = list.getJSONObject(2);
 			JSONObject main6AM = obj6AM.getJSONObject("main");
-			float obj6AMTemarature = Float
-					.parseFloat(main6AM.getString("temp"));
+			float obj6AMTemarature = Float.parseFloat(main6AM.getString("temp"));
 			JSONArray wetherIcon6AMArray = obj6AM.getJSONArray("weather");
 			JSONObject wetherIcon6AM = wetherIcon6AMArray.getJSONObject(0);
-			String obj6AMICON = wetherIcon6AM.getString("icon");
+			String obj6AMICON = wetherIcon6AM.getString("id");
 
 			JSONObject obj9AM = list.getJSONObject(3);
 			JSONObject main9AM = obj9AM.getJSONObject("main");
-			float obj9AMTemarature = Float
-					.parseFloat(main9AM.getString("temp"));
+			float obj9AMTemarature = Float.parseFloat(main9AM.getString("temp"));
 			JSONArray wetherIcon9AMArray = obj9AM.getJSONArray("weather");
 			JSONObject wetherIcon9AM = wetherIcon9AMArray.getJSONObject(0);
-			String obj9AMICON = wetherIcon9AM.getString("icon");
+			String obj9AMICON = wetherIcon9AM.getString("id");
 
 			JSONObject obj12PM = list.getJSONObject(4);
 			JSONObject main12PM = obj12PM.getJSONObject("main");
-			float obj12PMTemarature = Float.parseFloat(main12PM
-					.getString("temp"));
+			float obj12PMTemarature = Float.parseFloat(main12PM.getString("temp"));
 			JSONArray wetherIcon12PMArray = obj12PM.getJSONArray("weather");
 			JSONObject wetherIcon12PM = wetherIcon12PMArray.getJSONObject(0);
-			String obj12PMICON = wetherIcon12PM.getString("icon");
+			String obj12PMICON = wetherIcon12PM.getString("id");
 
 			JSONObject obj3PM = list.getJSONObject(5);
 			JSONObject main3PM = obj3PM.getJSONObject("main");
-			float obj3PMTemarature = Float
-					.parseFloat(main3PM.getString("temp"));
+			float obj3PMTemarature = Float.parseFloat(main3PM.getString("temp"));
 			JSONArray wetherIcon3PMArray = obj3PM.getJSONArray("weather");
 			JSONObject wetherIcon3PM = wetherIcon3PMArray.getJSONObject(0);
-			String obj3PMICON = wetherIcon3PM.getString("icon");
+			String obj3PMICON = wetherIcon3PM.getString("id");
 
 			JSONObject obj6PM = list.getJSONObject(6);
 			JSONObject main6PM = obj6PM.getJSONObject("main");
-			float obj6PMTemarature = Float
-					.parseFloat(main6PM.getString("temp"));
+			float obj6PMTemarature = Float.parseFloat(main6PM.getString("temp"));
 			JSONArray wetherIcon6PMArray = obj6PM.getJSONArray("weather");
 			JSONObject wetherIcon6PM = wetherIcon6PMArray.getJSONObject(0);
-			String obj6PMICON = wetherIcon6PM.getString("icon");
+			String obj6PMICON = wetherIcon6PM.getString("id");
 
 			JSONObject obj9PM = list.getJSONObject(7);
 			JSONObject main9PM = obj9PM.getJSONObject("main");
-			float obj9PMTemarature = Float
-					.parseFloat(main9PM.getString("temp"));
+			float obj9PMTemarature = Float.parseFloat(main9PM.getString("temp"));
 			JSONArray wetherIcon9PMArray = obj9PM.getJSONArray("weather");
 			JSONObject wetherIcon9PM = wetherIcon9PMArray.getJSONObject(0);
-			String obj9PMICON = wetherIcon9PM.getString("icon");
+			String obj9PMICON = wetherIcon9PM.getString("id");
 
 			// Create a Hourly Weather Object to Pass the Relevant Data
 			hwObj = new HourlyWeather(obj12AMTemarature, obj3AMTemarature,
@@ -178,6 +185,12 @@ public class JSONParser {
 		return hwObj;
 	}
 
+	
+	/**
+	 * This method is used to retrieve forecast weather information 
+	 * @param josn3 - It takes the url in String format
+	 * @return - It returns the ArrayList<DayWeather> 
+	 */
 	public ArrayList<DayWeather> getSevendayForecast(String josn3) {
 
 		DayWeather dayWeather = null;
@@ -261,6 +274,11 @@ public class JSONParser {
 		return arrayList;
 	}
 
+	/**
+	 * This methos is used to get the city weather 
+	 * @param json4 -  It takes the url in String format
+	 * @return - It retuns a City object 
+	 */
 	public City getCityWeather(String json4) {
 
 		Log.v("Result City ", "Result City : " + json4);
@@ -352,6 +370,11 @@ public class JSONParser {
 		return cityObj;
 	}
 
+	/**
+	 * This method is used to get the correct temparature in Celcius
+	 * @param temparature - It taked the Current Farenhiet temparature in float
+	 * @return - It returns the current temparature in Celcius
+	 */
 	public int getCorrectTemparatureInCelcius(float temparature) {
 
 		int temparetureCelcius;
@@ -369,6 +392,11 @@ public class JSONParser {
 
 	}
 
+	/**
+	 * This method is used to get the relevant Day of the Week
+	 * @param timestamp - It get the current time stamp in long format
+	 * @return -  It returns the Day of the Week
+	 */
 	@SuppressLint("NewApi")
 	public static String getDateStringCurrentTimeZone(long timestamp) {
 

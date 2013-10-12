@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 /**
  * This Class is Used as an Adapter for ViewPager
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class TabsAdapter extends FragmentPagerAdapter {

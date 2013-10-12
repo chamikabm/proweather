@@ -12,15 +12,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * This class is used to Collect Favouriets Locations Weather Informations
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class FavouritsAdapter extends ArrayAdapter<City> {
 
 	private Context context;
 	private int layoutResourceId;
 	private List<City> objects;
 
-	public FavouritsAdapter(Context context, int layoutResourceId,
-			List<City> objects) {
+	public FavouritsAdapter(Context context, int layoutResourceId,List<City> objects) {
 
+		
 		super(context, layoutResourceId, objects);
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
@@ -82,6 +87,11 @@ public class FavouritsAdapter extends ArrayAdapter<City> {
 
 	}
 
+	/**
+	 * This method is used to get the corrent temparature in Celcius format
+	 * @param temparature - It takes the given temparature value in float
+	 * @return - It reurns the relevant temparatute in Celcius
+	 */
 	private int getCorrectTemparature(float temparature) {
 
 		int temparetureCelcius;
@@ -98,6 +108,11 @@ public class FavouritsAdapter extends ArrayAdapter<City> {
 		return temparetureCelcius;
 	}
 
+	/**
+	 * This class is used to Hold the favouriets TextViews
+	 * @author Chamika
+	 *
+	 */
 	private static class FavouritsHolder {
 		TextView cityName, cityDescription, cityTemperature,
 				cityTemperatureMax, cityTemperatureMin, cityHumidity,

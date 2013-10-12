@@ -16,7 +16,7 @@ import android.util.Log;
 /**
  * This Class is Used to Retrive  the GPS Location Information
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class GPSTracker extends Service implements LocationListener {

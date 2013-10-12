@@ -18,7 +18,7 @@ import android.widget.Toast;
 /**
  * This Class is Used to Retrive and Show data of the GPS Location Weather Data For Comming 7 Days (Weather Forecast)
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 public class Day_7 extends BaseFragment {

@@ -13,6 +13,11 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+/**
+ * This Class is Used to Hold Fragments Home , 7_Day , Favouriets , Tsunami 
+ * @author Chamika
+ * E-mail : kasun.chamika@gmail.com
+ */
 public class FragmentsActivity extends SherlockFragmentActivity implements OnPageChangeListener ,TabListener{
 
 	//Create Variables to Hold ViewPager,ActionBar and Constant ACTIVE_TAB

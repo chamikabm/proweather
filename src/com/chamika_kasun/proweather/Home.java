@@ -1,7 +1,6 @@
 package com.chamika_kasun.proweather;
 
 import java.io.IOException;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -19,17 +17,20 @@ import com.chamika_kasun.proweather.objects.Location;
 import com.chamika_kasun.proweather.objects.Weather;
 import com.chamika_kasun.proweather.utility.Constants;
 import com.chamika_kasun.proweather.utility.Utils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +40,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * This Class is Used to Retrive and Show data of the GPS Location Weather Data
  * @author Chamika
- * 		   E-mail :  kasun.chamika@gmail.com
+ * E-mail :  kasun.chamika@gmail.com
  */
 
 
@@ -62,14 +64,17 @@ public class Home extends BaseFragment {
 	private Location locationCurrent;
 
 	// Define all the TextViews that in the home XML
-	TextView updateTime, location, time, dayWord, day, temperature,
+	private TextView updateTime, location, time, dayWord, day, temperature,
 			temperatureMax, temperatureMin, humidity, sunrise, sunset,
 			windSpeed, windDirection, pressure, tvTime12AMValue,
 			tvTime3AMValue, tvTime6AMValue, tvTime9AMValue, tvTime12PMValue,
 			tvTime3PMValue, tvTime6PMValue, tvTime9PMValue;
 
 	// Define location Button
-	ImageView locationButton;
+	private ImageView locationButton,weatherIcon,weatherIcon12AM,weatherIcon3AM,weatherIcon6AM,weatherIcon9AM,weatherIcon12PM,weatherIcon3PM,weatherIcon6PM,weatherIcon9PM;
+	
+	// timer to update UI
+	private Timer uiUpdater; 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -96,6 +101,17 @@ public class Home extends BaseFragment {
 		windSpeed = (TextView) convertView.findViewById(R.id.tvWindValue);
 		windDirection = (TextView) convertView.findViewById(R.id.tvWindDirectionValue);
 		pressure = (TextView) convertView.findViewById(R.id.tvPressureValue);
+		
+		//Setting for Weather Icon
+		weatherIcon = (ImageView) convertView.findViewById(R.id.ivWeatherCondition);
+		weatherIcon12AM = (ImageView) convertView.findViewById(R.id.iv12AM);
+		weatherIcon3AM = (ImageView) convertView.findViewById(R.id.iv3AM);
+		weatherIcon6AM = (ImageView) convertView.findViewById(R.id.iv6AM);
+		weatherIcon9AM = (ImageView) convertView.findViewById(R.id.iv6AM);
+		weatherIcon12PM = (ImageView) convertView.findViewById(R.id.iv12PM);
+		weatherIcon3PM = (ImageView) convertView.findViewById(R.id.iv3PM);
+		weatherIcon6PM = (ImageView) convertView.findViewById(R.id.iv6PM);
+		weatherIcon9PM = (ImageView) convertView.findViewById(R.id.iv9PM);
 
 		// Setting for Hourly Related TextViews.
 		tvTime12AMValue = (TextView) convertView.findViewById(R.id.tvTime12AMValue);
@@ -106,6 +122,8 @@ public class Home extends BaseFragment {
 		tvTime3PMValue = (TextView) convertView.findViewById(R.id.tvTime3PMValue);
 		tvTime6PMValue = (TextView) convertView.findViewById(R.id.tvTime6PMValue);
 		tvTime9PMValue = (TextView) convertView.findViewById(R.id.tvTime9PMValue);
+		
+		
 		
 		//Create Database to Store Favouriets Data
 		database = new ProWeatherDataBase(getActivity());	
@@ -131,6 +149,9 @@ public class Home extends BaseFragment {
 
 		locationButton.setOnClickListener(new OnClickListener() {
 
+			/**
+			 * This mthos is used to get the clicked action and according to that get the location details.
+			 */
 			@Override
 			public void onClick(View v) {
 
@@ -195,6 +216,26 @@ public class Home extends BaseFragment {
 
 			}
 		});
+		
+		
+		//Code Start of Alarm
+		
+		 // setup an alarm
+		// alarm will be triggered @ 11.00 p.m. everyday
+//		Calendar updateTime = Calendar.getInstance();
+//		updateTime.set(Calendar.HOUR_OF_DAY, 00);
+//		updateTime.set(Calendar.MINUTE,24);
+//			
+//		Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+//		PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+//		
+//		AlarmManager alarms = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+//		alarms.setRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+		
+		//Code End of Alarm
+		
+		//Set language for the Notification
+		
 
 		// Code Sniffet for the Popup Window End
 
@@ -242,7 +283,7 @@ public class Home extends BaseFragment {
 			
 		}
 
-		TimerTask t = new TimerTask() {
+		TimerTask timerTask = new TimerTask() {
 			
 			@Override
 			public void run() {
@@ -252,15 +293,16 @@ public class Home extends BaseFragment {
 			}
 		};
 		
-		Timer tt = new Timer();
-		tt.scheduleAtFixedRate(t, 0, 60000);
+		uiUpdater = new Timer();
+		uiUpdater.scheduleAtFixedRate(timerTask, 0, 60000);
 		
-		
-
 		return convertView;
 
 	}
 
+	/**
+	 * This method is used to Update current location weather on the Home Screen
+	 */
 	@Override
 	public void onTaskFinished(String result) {
 		super.onTaskFinished(result);
@@ -296,6 +338,90 @@ public class Home extends BaseFragment {
 			location.setText(weatherInfo.getCity());
 			humidity.setText(String.valueOf(weatherInfo.getHumidity() + "%"));
 			pressure.setText(String.valueOf(weatherInfo.getPressure()));
+			
+			int id = Integer.parseInt(weatherInfo.getId());
+			Log.v("Weather Icon Code", "Weather Icon Code :"+id);
+			
+			
+			switch (id) {			
+				
+			case 500: //light rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 500");
+				weatherIcon.setImageResource(R.drawable.q500);
+				break;
+				
+			case 501: //moderate rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 501");
+				weatherIcon.setImageResource(R.drawable.q501);
+				break;
+				
+			case 502: //heavy intensity rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 502");
+				weatherIcon.setImageResource(R.drawable.q502);
+				break;
+
+			case 503: //very heavy rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 503");
+				weatherIcon.setImageResource(R.drawable.q503);
+				break;
+
+			case 504: //extreme rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 504");
+				weatherIcon.setImageResource(R.drawable.q504);
+				break;
+				
+			case 511: //freezing rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 511");
+				weatherIcon.setImageResource(R.drawable.q511);
+				break;
+				
+			case 520: //light intensity shower rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 520");
+				weatherIcon.setImageResource(R.drawable.q520);
+				break;
+				
+			case 521: //shower rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 521");
+				weatherIcon.setImageResource(R.drawable.q521);
+				break;
+				
+			case 522: //heavy intensity shower rain
+				Log.v("Weather Icon Code", "Weather Icon Code : 522");
+				weatherIcon.setImageResource(R.drawable.q522);
+				break;
+				
+			case 800: //Sky is Clear
+				Log.v("Weather Icon Code", "Weather Icon Code : 800");
+				weatherIcon.setImageResource(R.drawable.q800);
+				break;
+
+			case 801: //few clouds
+				Log.v("Weather Icon Code", "Weather Icon Code : 801");
+				weatherIcon.setImageResource(R.drawable.q801);
+				break;
+
+			case 802: //few clouds
+				Log.v("Weather Icon Code", "Weather Icon Code : 802");
+				weatherIcon.setImageResource(R.drawable.q802);
+				break;
+				
+			case 803: //scattered clouds 
+				Log.v("Weather Icon Code", "Weather Icon Code : 803");
+				weatherIcon.setImageResource(R.drawable.q803);
+				break;
+				
+			case 804: //broken clouds  
+				Log.v("Weather Icon Code", "Weather Icon Code : 804");
+				weatherIcon.setImageResource(R.drawable.q804);
+				break;
+				
+			case 805: //overcast clouds  
+				Log.v("Weather Icon Code", "Weather Icon Code : 805");
+				weatherIcon.setImageResource(R.drawable.q805);
+				break;
+			}
+			
+			
 
 		} else {
 
@@ -305,6 +431,9 @@ public class Home extends BaseFragment {
 
 	}
 
+	/**
+	 * This method is used to update the Hourly Weather information on the Home screen.
+	 */
 	@Override
 	public void onSubTaskFinished(String result) {
 		
@@ -316,27 +445,51 @@ public class Home extends BaseFragment {
 
 			// Assign valuse to TextViews.
 			tvTime12AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime12AMValue()))+ "\u2103");
+			String id12AM = hwinfo.getTvTime12AMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id12AM);
+			weatherIcon12AM.setImageResource(getDrawable(id12AM));
 			// Log.v("12AM ", String.valueOf(hwinfo.getTvTime12AMValue()));
 			
 			tvTime3AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime3AMValue()))+ "\u2103");
+			String id3AM = hwinfo.getTvTime3AMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id3AM);
+			weatherIcon3AM.setImageResource(getDrawable(id3AM));
 			// Log.v("3AM ", String.valueOf(hwinfo.getTvTime3AMValue()));
 			
 			tvTime6AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6AMValue()))+ "\u2103");
+			String id6AM = hwinfo.getTvTime6AMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id6AM);
+			weatherIcon6AM.setImageResource(getDrawable(id6AM));
 			// Log.v("6AM ", String.valueOf(hwinfo.getTvTime6AMValue()));
 			
 			tvTime9AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9AMValue()))+ "\u2103");
+			String id9AM = hwinfo.getTvTime9AMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id9AM);
+			weatherIcon9AM.setImageResource(getDrawable(id9AM));
 			// Log.v("9AM ", String.valueOf(hwinfo.getTvTime9AMValue()));
 			
 			tvTime12PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime12PMValue()))+ "\u2103");
+			String id12PM = hwinfo.getTvTime12PMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id12PM);
+			weatherIcon12PM.setImageResource(getDrawable(id12PM));
 			// Log.v("12PM", String.valueOf(hwinfo.getTvTime12PMValue()));
 			
 			tvTime3PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime3PMValue()))+ "\u2103");
+			String id3PM = hwinfo.getTvTime3PMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id3PM);
+			weatherIcon3PM.setImageResource(getDrawable(id3PM));
 			// Log.v("3PM ", String.valueOf(hwinfo.getTvTime3PMValue()));
 			
 			tvTime6PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()))+ "\u2103");
+			String id6PM = hwinfo.getTvTime6PMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id6PM);
+			weatherIcon6PM.setImageResource(getDrawable(id6PM));
 			// Log.v("6PM ", String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()));
 			
 			tvTime9PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()))+ "\u2103");
+			String id9PM = hwinfo.getTvTime9PMICON();
+			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id9PM);
+			weatherIcon9PM.setImageResource(getDrawable(id9PM));
 			// Log.v("9PM ",String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()));
 			
 		} else {
@@ -464,6 +617,9 @@ public class Home extends BaseFragment {
 
 	}
 
+	/**
+	 * This method is used to update the location weather 
+	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
@@ -508,6 +664,10 @@ public class Home extends BaseFragment {
 		executeBackgroundTask(Constants.LOCATION_WEATHER_HOURLY_URL_ON_COORDINATES + "lat="+ lattitude2 + "&lon=" + longitude2, false);
 
 	}
+	
+	/**
+	 * This method is used to Create the Homw menu
+	 */
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -516,7 +676,11 @@ public class Home extends BaseFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		
 	}
+	
 
+	/**
+	 * This methos is used to add a save button to home screen
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {	
 		
@@ -564,6 +728,111 @@ public class Home extends BaseFragment {
 		}
 		
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * This method is used to update the saved configuration 
+	 */
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		//Log.v("Home", "On Destroy View");
+		
+		// disabling ui updater
+		uiUpdater.cancel();
+	}
+	
+
+	/**
+	 * This methos is used to get drwable icon according to the weather icon code
+	 * @param weatherId - It takes the relevant weather condition pre defined value in String
+	 * @return - Relevent drwable integer Value
+	 */
+	public int getDrawable(String weatherId){
+		
+		int id = Integer.parseInt(weatherId);
+		int returnDrwanleId = 500;
+		
+		switch (id) {			
+		
+		case 500: //light rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 500");
+			returnDrwanleId = R.drawable.q500;
+			break;
+			
+		case 501: //moderate rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 501");
+			returnDrwanleId = R.drawable.q501;
+			break;
+			
+		case 502: //heavy intensity rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 502");
+			returnDrwanleId = R.drawable.q502;
+			break;
+
+		case 503: //very heavy rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 503");
+			returnDrwanleId = R.drawable.q503;
+			break;
+
+		case 504: //extreme rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 504");
+			returnDrwanleId = R.drawable.q504;
+			break;
+			
+		case 511: //freezing rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 511");
+			returnDrwanleId = R.drawable.q511;
+			break;
+			
+		case 520: //light intensity shower rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 520");
+			returnDrwanleId = R.drawable.q520;
+			break;
+			
+		case 521: //shower rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 521");
+			returnDrwanleId = R.drawable.q521;
+			break;
+			
+		case 522: //heavy intensity shower rain
+			Log.v("Weather Icon Code", "Weather Icon Code : 522");
+			returnDrwanleId = R.drawable.q522;
+			break;
+			
+		case 800: //Sky is Clear
+			Log.v("Weather Icon Code", "Weather Icon Code : 800");
+			returnDrwanleId = R.drawable.q800;
+			break;
+
+		case 801: //few clouds
+			Log.v("Weather Icon Code", "Weather Icon Code : 801");
+			returnDrwanleId = R.drawable.q801;
+			break;
+
+		case 802: //few clouds
+			Log.v("Weather Icon Code", "Weather Icon Code : 802");
+			returnDrwanleId = R.drawable.q802;
+			break;
+			
+		case 803: //scattered clouds 
+			Log.v("Weather Icon Code", "Weather Icon Code : 803");
+			returnDrwanleId = R.drawable.q803;
+			break;
+			
+		case 804: //broken clouds  
+			Log.v("Weather Icon Code", "Weather Icon Code : 804");
+			returnDrwanleId = R.drawable.q804;
+			break;
+			
+		case 805: //overcast clouds  
+			Log.v("Weather Icon Code", "Weather Icon Code : 805");
+			returnDrwanleId = R.drawable.q805;
+			break;
+		}
+		
+		
+		return returnDrwanleId;
 	}
 	
 	
