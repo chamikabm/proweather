@@ -107,7 +107,7 @@ public class Home extends BaseFragment {
 		weatherIcon12AM = (ImageView) convertView.findViewById(R.id.iv12AM);
 		weatherIcon3AM = (ImageView) convertView.findViewById(R.id.iv3AM);
 		weatherIcon6AM = (ImageView) convertView.findViewById(R.id.iv6AM);
-		weatherIcon9AM = (ImageView) convertView.findViewById(R.id.iv6AM);
+		weatherIcon9AM = (ImageView) convertView.findViewById(R.id.iv9AM);
 		weatherIcon12PM = (ImageView) convertView.findViewById(R.id.iv12PM);
 		weatherIcon3PM = (ImageView) convertView.findViewById(R.id.iv3PM);
 		weatherIcon6PM = (ImageView) convertView.findViewById(R.id.iv6PM);
@@ -339,88 +339,10 @@ public class Home extends BaseFragment {
 			humidity.setText(String.valueOf(weatherInfo.getHumidity() + "%"));
 			pressure.setText(String.valueOf(weatherInfo.getPressure()));
 			
-			int id = Integer.parseInt(weatherInfo.getId());
-			Log.v("Weather Icon Code", "Weather Icon Code :"+id);
+			String wid = weatherInfo.getId();
 			
-			
-			switch (id) {			
-				
-			case 500: //light rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 500");
-				weatherIcon.setImageResource(R.drawable.q500);
-				break;
-				
-			case 501: //moderate rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 501");
-				weatherIcon.setImageResource(R.drawable.q501);
-				break;
-				
-			case 502: //heavy intensity rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 502");
-				weatherIcon.setImageResource(R.drawable.q502);
-				break;
-
-			case 503: //very heavy rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 503");
-				weatherIcon.setImageResource(R.drawable.q503);
-				break;
-
-			case 504: //extreme rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 504");
-				weatherIcon.setImageResource(R.drawable.q504);
-				break;
-				
-			case 511: //freezing rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 511");
-				weatherIcon.setImageResource(R.drawable.q511);
-				break;
-				
-			case 520: //light intensity shower rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 520");
-				weatherIcon.setImageResource(R.drawable.q520);
-				break;
-				
-			case 521: //shower rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 521");
-				weatherIcon.setImageResource(R.drawable.q521);
-				break;
-				
-			case 522: //heavy intensity shower rain
-				Log.v("Weather Icon Code", "Weather Icon Code : 522");
-				weatherIcon.setImageResource(R.drawable.q522);
-				break;
-				
-			case 800: //Sky is Clear
-				Log.v("Weather Icon Code", "Weather Icon Code : 800");
-				weatherIcon.setImageResource(R.drawable.q800);
-				break;
-
-			case 801: //few clouds
-				Log.v("Weather Icon Code", "Weather Icon Code : 801");
-				weatherIcon.setImageResource(R.drawable.q801);
-				break;
-
-			case 802: //few clouds
-				Log.v("Weather Icon Code", "Weather Icon Code : 802");
-				weatherIcon.setImageResource(R.drawable.q802);
-				break;
-				
-			case 803: //scattered clouds 
-				Log.v("Weather Icon Code", "Weather Icon Code : 803");
-				weatherIcon.setImageResource(R.drawable.q803);
-				break;
-				
-			case 804: //broken clouds  
-				Log.v("Weather Icon Code", "Weather Icon Code : 804");
-				weatherIcon.setImageResource(R.drawable.q804);
-				break;
-				
-			case 805: //overcast clouds  
-				Log.v("Weather Icon Code", "Weather Icon Code : 805");
-				weatherIcon.setImageResource(R.drawable.q805);
-				break;
-			}
-			
+			Log.v("Weather Icon Code", "Weather Icon Code :"+wid);
+			weatherIcon.setImageResource(getDrawable(wid));			
 			
 
 		} else {
@@ -446,49 +368,49 @@ public class Home extends BaseFragment {
 			// Assign valuse to TextViews.
 			tvTime12AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime12AMValue()))+ "\u2103");
 			String id12AM = hwinfo.getTvTime12AMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id12AM);
+			Log.v("Hourly Weather Icon : ", "12AM Hourly Weather Icon : "+id12AM);
 			weatherIcon12AM.setImageResource(getDrawable(id12AM));
 			// Log.v("12AM ", String.valueOf(hwinfo.getTvTime12AMValue()));
 			
 			tvTime3AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime3AMValue()))+ "\u2103");
 			String id3AM = hwinfo.getTvTime3AMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id3AM);
+			Log.v("Hourly Weather Icon : ", "3AM Hourly Weather Icon : "+id3AM);
 			weatherIcon3AM.setImageResource(getDrawable(id3AM));
 			// Log.v("3AM ", String.valueOf(hwinfo.getTvTime3AMValue()));
 			
 			tvTime6AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6AMValue()))+ "\u2103");
 			String id6AM = hwinfo.getTvTime6AMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id6AM);
+			Log.v("Hourly Weather Icon : ", "6AM Hourly Weather Icon : "+id6AM);
 			weatherIcon6AM.setImageResource(getDrawable(id6AM));
 			// Log.v("6AM ", String.valueOf(hwinfo.getTvTime6AMValue()));
 			
 			tvTime9AMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9AMValue()))+ "\u2103");
 			String id9AM = hwinfo.getTvTime9AMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id9AM);
+			Log.v("Hourly Weather Icon : ", "9AM Hourly Weather Icon : "+id9AM);
 			weatherIcon9AM.setImageResource(getDrawable(id9AM));
 			// Log.v("9AM ", String.valueOf(hwinfo.getTvTime9AMValue()));
 			
 			tvTime12PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime12PMValue()))+ "\u2103");
 			String id12PM = hwinfo.getTvTime12PMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id12PM);
+			Log.v("Hourly Weather Icon : ", "12PM Hourly Weather Icon : "+id12PM);
 			weatherIcon12PM.setImageResource(getDrawable(id12PM));
 			// Log.v("12PM", String.valueOf(hwinfo.getTvTime12PMValue()));
 			
 			tvTime3PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime3PMValue()))+ "\u2103");
 			String id3PM = hwinfo.getTvTime3PMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id3PM);
+			Log.v("Hourly Weather Icon : ", "3PM Hourly Weather Icon : "+id3PM);
 			weatherIcon3PM.setImageResource(getDrawable(id3PM));
 			// Log.v("3PM ", String.valueOf(hwinfo.getTvTime3PMValue()));
 			
 			tvTime6PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()))+ "\u2103");
 			String id6PM = hwinfo.getTvTime6PMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id6PM);
+			Log.v("Hourly Weather Icon : ", "6PM Hourly Weather Icon : "+id6PM);
 			weatherIcon6PM.setImageResource(getDrawable(id6PM));
 			// Log.v("6PM ", String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime6PMValue()));
 			
 			tvTime9PMValue.setText(String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()))+ "\u2103");
 			String id9PM = hwinfo.getTvTime9PMICON();
-			Log.v("Hourly Weather Icon : ", "Hourly Weather Icon : "+id9PM);
+			Log.v("Hourly Weather Icon : ", "9PM Hourly Weather Icon : "+id9PM);
 			weatherIcon9PM.setImageResource(getDrawable(id9PM));
 			// Log.v("9PM ",String.valueOf(getCorrectTemparatureInCelcius(hwinfo.getTvTime9PMValue()));
 			

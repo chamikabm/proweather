@@ -259,7 +259,7 @@ public class JSONParser {
 				dayWeather.setHumidity(humidity);
 				dayWeather.setPressure(pressure);
 				dayWeather.setDescription(description);
-				dayWeather.setIconCode(icon);
+				dayWeather.setIconCode(id);
 
 				wind = new Wind(windSpeed, deg);
 				dayWeather.setWind(wind);
@@ -310,7 +310,7 @@ public class JSONParser {
 			JSONObject weatherItem = weather.getJSONObject(0);
 			String mainDescription = weatherItem.getString("main");
 			String description = weatherItem.getString("description");
-			String iconCode = weatherItem.getString("icon");
+			String iconCode = weatherItem.getString("id");
 
 			// Create Child Object to get weather conditions. and get relevant
 			// data.
